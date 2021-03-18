@@ -1,0 +1,11 @@
+make clean
+
+Clear
+
+python2.7 parsereact.py reakce_new_19.txt
+
+make
+
+./Run
+
+./GNUPLOT.p

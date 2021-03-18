@@ -1,0 +1,2097 @@
+INTERFACE:
+
+RADAU5
+
+ENDINTERFACE
+
+SPECIES:
+
+
+e
+
+
+
+H H2 H2(vib) H2(rot) CH C C2 C3 C4 C5 (1)CH2 (3)CH2 CH3 CH4
+C2H C2H2 C2H3 C2H4 C2H5 C2H6
+C3H3 C3H5 C3H6 C3H7 C3H8
+(c-)C3H (l-)C3H (c-)C3H2 (l-)C3H2 (t-)C3H2
+CH3C2H CH2CCH2 C6H5C2H
+C4H C4H2 C4H3 C4H4 C4H5 C4H6 C4H7 C4H8 C4H9 C4H10 C4H2X
+C5H C5H2 C5H3 C5H4 C5H5 C5H6 C5H7 C5H8 C5H9 C5H10 C5H11 C5H12
+C6H C6H2 C6H3 C6H4 C6H5 C6H6 C6H7 C6H8 C6H9 C6H10 C6H11 C6H12 C6H13 C6H14
+C7H3 C7H4 C7H5 C7H6 C7H7 C7H9 C7H10
+C8H C8H2 C8H3 C8H4 C8H5
+
+
+
+N(2D) N N2 N2(A) N2(a') N2(B) N2(C) N2+ N3+ N4+ NH NH2 NH3 N2H N2H2 N2H3 N2H4 N2(rot) N2(vib)
+
+
+
+CN CN2 HCN H2CN HNC CHCN
+HC3N HC4N HC5N HC7N
+CH3CN CH2CN
+CH3NH CH3NH2 CH2NH
+C2N C3N C4N C5N C2N2 C4N2 C6N2
+HC4N2 H2CNCN H2C3N H2C5N HCNN H2CNN HC2N2
+C2H3CN C2H4CN C2H5CN
+C2H3NH C2H3NH2 C2H3C3N C2H3C5N
+HNCNH NCCHNH HNCCHCN HNCHNH2 HNCHCN CH2NCH (c)CH2NCH H4C4N
+CH2NCH3 CH2C3N CH3C3N
+CH3NNH CH3CNNH CH3NNCH3 H2CNNH2 CH3NHCH3 CH3CHNH
+C4H4NH C4H6NH
+C5H3CN
+C3H5CN C3H6CN C3H7CN C3H7C3N  C4N2H2 C4H3CN C4H4CN C4H7CN C6H5CN
+C2H5C3N C2H3C3CN C2H5C3CN C2H3C5CN
+
+
+
+O O(1D) O2 O2(a) O2(b) O3 O2+ O- O+ O2(vib) O2(rot)
+HCO CO CO2 OH OH(A) H2O H2O(vib) H2O2 HNO HNO2 HNO3 HNO4 HCCO H2CO CH2CO CH3CHO CH3CO HNCO CH3O C2H5O CH3O2 C2H5O2
+CH2OH CH3OH C2H5OH CH3OOH C2H5OOH C2H2O C2H2OH C2H4OH C2HO CH2CHO NCO CH3NO N2O C2O HO2
+
+
+
+NO NO(A) NO(B) NO2 NO2(A) NO+ N2O NO3 N2O3 N2O4 N2O5 N2O(vib)
+
+
+
+Ar SOOTC SOOTN hv
+
+
+
+wall NH2(S)
+
+ENDSPECIES
+
+
+FIXED:
+
+hv
+
+ENDFIXED
+
+
+
+INITVAL:
+
+
+
+
+
+
+DEFAULT 0.0
+
+
+
+
+
+
+
+ENDINITVAL
+
+
+
+REACTIONS:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+H + H => H2 			    !   n_N2/(n_N2/(1.0e-10) + 1.0/(9.14e-33*(T_g/300)**(-0.6)))
+H + CH => C + H2		    !   1.24e-10*(T_g/300)**0.26
+H + (1)CH2 => CH + H2		    !   2.2e-10*(T_g/300)**0.32
+H + (3)CH2 => CH + H2		    !   2.2e-10*(T_g/300)**0.32
+H + (3)CH2 => CH3		    !   n_N2/(n_N2/1.5e-10 + 1.0/(3.1e-30*exp(457/T_g)))
+H + CH3 => (3)CH2 + H2		    !   1.0e-10*exp(-7600/T_g)
+H + CH3 => CH4			    !   n_N2*6e-29*(T_g/300)**(-1.8)
+H + CH4 => CH3 + H2		    !   5.89e-13*((T_g/300)**3)*exp(-4040/T_g)
+H + C2H => C2H2		    !   2.3e-10*(T_g/300)**0.32
+H + C2H2 => C2H + H2 		    !   1.0e-10*exp(-11200/T_g)
+H + C2H2 => C2H3 		    !   n_N2/(n_N2/( 1.17e-13*((T_g/300)**8.41)*exp (359/T_g)) + 1.0/(2.0e-30*((T_g/300)**(-1.07))*exp(-83.8/T_g)))
+H + C2H3 => C2H2 + H2 		    !   6.0e-11
+H + C2H3 => C2H4  		    !   n_N2/(n_N2/(1.0e-10)+1.0/(3.47e-27*(T_g/300)**(-1.3)))
+H + C2H4 => C2H5		    !   n_N2/(n_N2/(6.07e-13*((T_g/300)**5.31)*exp(174/T_g)) + 1.0/(1.0e-29*((T_g/300)**(-1.51)*exp(-72.9/T_g))))
+H + C2H5 => C2H4 + H2		    !   3.0e-12
+H + C2H5 => C2H6		    !   n_N2/(n_N2/(1.07e-10) + 1.0/(2.0e-28*(T_g/300)**(-1.5)))
+H + C2H5 => CH3 + CH3		    !   1.07e-10
+H + C2H6 => C2H5 + H2		    !   1.22e-11*((T_g/300)**1.5)*exp(-3720/T_g)
+H + C3 => (c-)C3H		    !   3.0e-11
+H + C3 => (l-)C3H		    !   3.0e-11
+H + (l-)C3H => (c-)C3H2	    !   2.0e-10
+H + (l-)C3H => C3 + H2		    !   0.8*2.0e-10
+H + (l-)C3H => (c-)C3H + H 	    !   0.2*2.0e-10
+H + (c-)C3H => (c-)C3H2	    !   2.0e-10
+H + (c-)C3H => C3 + H2 	    !   2.0e-10
+H + (c-)C3H2 => C3H3		    !   2.0e-10
+H + (l-)C3H2 => C3H3		    !   4.0e-10*(T_g/300)**0.17
+H + (l-)C3H2 => (c-)C3H2 + H	    !   4.0e-10*(T_g/300)**0.17
+H + (t-)C3H2 => C3H3		    !   4.42e-10*((T_g/300)**0.22)*exp(-43.7/T_g)
+
+
+H + (t-)C3H2 => (c-)C3H2 + H       !   4.42e-10*((T_g/300)**0.22)*exp(-43.7/T_g)
+H + C3H3 => CH3C2H		    !   2.3e-10*((T_g/300)**0.15)*exp(46.3/T_g)
+H + C3H3 => CH2CCH2 		    !   6.0e-11*((T_g/300)**0.15)*exp(46.3/T_g)
+H + CH3C2H => C3H5 		    !   6.0e-11*exp(-1233/T_g)
+H + CH2CCH2 => C3H5 		    !   1.4e-11*exp(-1010/T_g)
+H + C3H5 => CH2CCH2 + H2 	    !   1.5e-11
+H + C3H5 => CH3C2H + H2 	    !   1.5e-11
+H + C3H5 => C3H6 		    !   2.3e-10*((T_g/300)**0.18)*exp(63/T_g)
+H + C3H6 => CH3 + C2H4		    !   2.19e-11*exp(-1640/T_g)
+H + C3H6 => C3H5 + H2		    !   4.33e-13*((T_g/300)**2.5)*exp(-1250/T_g)
+H + C3H6 => C3H7 		    !   n_N2/(n_N2/(7.02e-12*((T_g/300)**1.16)*exp(-440/T_g)) + 1.0/(3.0e-25*((T_g/300)**(-2.48)*exp(-191/T_g))))
+H + C3H7 => C3H6 + H2		    !   3.0e-12
+H + C3H7 => C3H8 		    !   n_N2/(n_N2/(9.68e-11*(T_g/300)**0.22)+ 1.0/(6.11e-28*((T_g/300)**(-2)*exp(-1040/T_g))))
+H + C3H7 => C2H5 + CH3		    !   9.68e-11*(T_g/300)**0.22
+H + C3H8 => C3H7 + H2 		    !   4.31e-12*((T_g/300)**2.54)*exp(-3400/T_g)
+H + C4H => C4H2 		    !   2.3e-10*(T_g/300)**0.32
+H + C4H2 => C4H3 		    !   n_N2/(n_N2/(1.6e-12*((T_g/300)**5.55)*exp(153/T_g))+ 1.0/(3.0e-25*((T_g/300)**(-2.93)*exp(-176/T_g))))
+H + C4H3 => C4H2 + H2 		    !   3.0e-11
+H + C4H3 => C4H4 		    !   n_N2/(n_N2/(1.3e-10*exp(14/T_g)) + 1.0/(1.0e-25*(T_g/300)**(-3.97)))
+H + C4H3 => C2H2 + C2H2 	    !   0.1*1.3e-10*exp(14/T_g)
+H + C4H4 => C4H5 		    !   n_N2/(n_N2/(3.3e-12) + 1.0/(3.0e-25*((T_g/300)**(-2.93)*exp(-176/T_g))))
+H + C4H5 => C4H4 + H2		    !   3.0e-11
+H + C4H5 => C4H6 		    !   n_N2/(n_N2/(1.3e-10) +1.0/(1.0e-26*(T_g/300)**(-4) ))
+H + C4H5 => CH3 + C3H3 	    !   0.8*1.3e-10
+H + C4H5 => C2H2 + C2H4 	    !   0.2*1.3e-10
+H + C4H6 => C4H5 + H2 		    !   5.69e-12*((T_g/300)**0.7)*exp(-3020/T_g)
+H + C4H6 => C4H7 		    !   n_N2/(n_N2/(7.9e-12) + 1.0/(1.4e-24*((T_g/300)**2.48)*exp(-191/T_g)))
+H + C4H7 => C4H6 + H2		    !   1.0e-11
+H + C4H7 => C4H8 		    !   n_N2/(n_N2/(1.0e-10) + 1.0/(1.0e-26))
+
+
+H + C4H7 => CH3 + C3H5 	    !   1.0e-10
+H + C4H8 => C4H9 		    !   n_N2/(n_N2/(3.97e-11*exp(-1060/T_g)) + 1.0/(1.4e-25*((T_g/300)**2.48)*exp(-191/T_g)))
+H + C4H9 => C4H8 + H2		    !   3.0e-12
+H + C4H9 => C4H10 		    !   n_N2/(n_N2/(1.0e-10) + 1.0/(1.0e-25 ))
+H + C4H9 => CH3 + C3H7 	    !   0.5*1.0e-10
+H + C4H9 => C2H5 + C2H5	    !   0.5*1.0e-10
+H + C6H => C6H2 		    !   n_N2/(n_N2/(3.0e-10) + 1.0/(2.64e-26*((T_g/300)**(-3.1)*exp(-721/T_g))))
+H + C6H2 => C6H3 		    !   1.6e-12*((T_g/300)**5.55)*exp(153/T_g)
+H + C6H3 => C6H2 + H2 		    !   1.0e-12
+H + C6H3 => C6H4 		    !   1.4e-10
+H + C6H3 => C2H2 + C4H2 	    !   1.4e-10
+H + C6H4 => C6H5 		    !   n_N2/(n_N2/(1.0e-11) + 1.0/(1.0e-25))
+H + C6H5 => C6H6 		    !   1.4e-10*exp(14/T_g)
+H + C6H6 => C6H5 + H2		    !   4.15e-10*exp(-8050/T_g)
+H + C6H6 => C6H7 		    !   n_N2/(n_N2/(5.27e-11*exp(-1600/T_g)) + 1.0/(3.3e-30*exp(-740/T_g) ))
+C + H2 => (3)CH2 		    !   n_N2/(n_N2/(2.06e-11*exp(-57/T_g)) + 1.0/(7.0e-32*(T_g/300)**(-1.5)))
+C + C => C2			    !   n_N2/(n_N2/(2.16e-11) + 1.0/(5.3e-31*(T_g/300)**(-1.6 )))
+C + C2H2 => C3 + H2 		    !   2.6e-10*(T_g/300)**(-0.07)
+C + C2H2 => (c-)C3H + H 	    !   4.1e-11*((T_g/300)**(-0.39)*exp(-2/T_g))
+C + C2H2 => (l-)C3H + H 	    !   7.8e-12*(T_g/300)**1.08
+C + C2H3 => (c-)C3H2 + H 	    !   4.0e-11
+C + C2H3 => (l-)C3H2 + H 	    !   2.0e-11
+C + C2H3 => (t-)C3H2 + H 	    !   3.0e-11
+C + C2H3 => (c-)C3H + H2 	    !   1.0e-11
+C + C2H3 => (l-)C3H + H2 	    !   1.0e-11
+C + C2H4 => C3H3 + H 		    !   2.1e-10*(T_g/300)**(-0.11)
+C + C2H4 => C2H2 + (3)CH2 	    !   2.0e-11*(T_g/300)**(-0.11)
+C + (c-)C3H2 => C4H + H 	    !   2.0e-10
+C + (t-)C3H2 => C4H + H 	    !   2.0e-11*(T_g/300)**(-0.54)
+C + (l-)C3H2 => C4H + H 	    !   2.0e-10
+C + CH3C2H => C4H3 + H 	    !   2.67e-10*(T_g/300)**(-0.11)
+C + CH2CCH2 => C4H3 + H 	    !   3.5e-10*(T_g/300)**(-0.01)
+
+
+C + C3H6 => C4H5 + H 		    !   1.4e-10*(T_g/300)**(-0.08)
+C + C3H6 => C3H3 + CH3 	    !   1.4e-10*(T_g/300)**(-0.08)
+C + C4H2 => C5H + H 		    !   3.0e-10
+C + C4H4 => C5H3 + H 		    !   3.0e-10
+C + C4H6 => C5H5 + H 		    !   3.0e-10
+C + C4H8 => C5H7 + H 		    !   3.0e-10
+C + C6H4 => C7H3 + H 		    !   3.0e-10
+C + C6H6 => C7H5 + H 		    !   3.0e-10
+CH + H2 => (3)CH2 + H		    !   3.1e-10*exp(-1650/T_g)
+CH + H2 => CH3 		    !   n_N2/(n_N2/(1.6e-10*(T_g/300)**(-0.08)) + 1.0/(6.2e-30*(T_g/300)**(-1.6) ))
+CH + CH => C2H + H 		    !   2.0e-10
+CH + CH => (3)CH2 + C 		    !   2.0e-11
+CH + (3)CH2 => C2H2 + H 	    !   2.0e-10
+CH + CH3 => C2H3 + H 		    !   1.0e-11
+CH + CH3 => C2H2 + H + H	    !   1.0e-10
+CH + CH4 => C2H4 + H 		    !   1.05e-10*((T_g/300)**(-1.04))*exp(-36.1/T_g)
+CH + C2H2 => (c-)C3H2 + H 	    !   1.3e-10*((T_g/300)**(-0.233))*exp(-16/T_g)
+CH + C2H2 => (t-)C3H2 + H 	    !   2.5e-10*((T_g/300)**(-0.233))*exp(-16/T_g)
+CH + C2H2 => (l-)C3H + H2 	    !   3.71e-11*((T_g/300)**(-0.233))*exp(-16/T_g)
+CH + C2H4 => CH3C2H + H 	    !   1.0e-10*((T_g/300)**(-0.546))*exp(-29.6/T_g)
+CH + C2H4 => CH2CCH2 + H 	    !   2.4e-10*((T_g/300)**(-0.546))*exp(-29.6/T_g)
+CH + C2H6 => C3H6 + H 		    !   5.0e-12*((T_g/300)**(-0.648))*exp(-43.6/T_g)
+CH + C2H6 => C2H4 + CH3 	    !   2.8e-11*((T_g/300)**(-0.648))*exp(-43.6/T_g)
+CH + C3 => C4 + H 		    !   2.0e-10
+CH + (c-)C3H2 => C4H2 + H 	    !   2.0e-10
+
+
+CH + (t-)C3H2 => C4H2 + H 	    !   2.0e-10
+CH + (l-)C3H2 => C4H2 + H 	    !   2.0e-10
+CH + CH3C2H => C4H4 + H 	    !   4.0e-10
+CH + CH2CCH2 => C4H4 + H 	    !   4.2e-10
+CH + C3H6 => C4H6 + H 		    !   3.3e-10
+CH + C3H6 => CH2CCH2 + CH3 	    !   9.0e-11
+CH + C3H8 => C4H8 + H 		    !   5.0e-11
+CH + C3H8 => C3H6 + CH3 	    !   1.4e-10
+CH + C3H8 => C2H5 + C2H4 	    !   8.0e-11
+CH + C4H2 => C5H2 + H 		    !   4.21e-10*((T_g/300)**(-0.233))*exp(-16/T_g)
+CH + C4H4 => C5H4 + H 		    !   2.0e-10
+CH + C4H6 => C5H6 + H 		    !   1.0e-10
+CH + C4H6 => C4H4 + CH3 	    !   1.0e-10
+CH + C4H8 => C5H8 + H 		    !   2.6e-10
+CH + C4H8 => C4H6 + CH3 	    !   1.1e-10
+CH + C4H10 => C5H10 + H 	    !   5.0e-11
+CH + C4H10 => C4H8 + CH3 	    !   3.0e-10
+CH + C6H6 => C7H6 + H 		    !   4.3e-10
+(1)CH2 + H2 => (3)CH2 + H2 	    !   1.6e-11*(T_g/300)**(-0.9)
+(1)CH2 + H2 => CH3 + H 	    !   8.8e-11*(T_g/300)**0.35
+(1)CH2 + (3)CH2 => C2H2 + H + H    !   3.0e-11
+(1)CH2 + (1)CH2 => C2H2 + H + H    !   5.0e-11
+(1)CH2 + CH3 => C2H4 + H 	    !   3.0e-11
+(1)CH2 + CH4 => (3)CH2 + CH4 	    !   3.1e-12*exp(250/T_g)
+(1)CH2 + CH4 => CH3 + CH3 	    !   2.79e-11*exp(250/T_g)
+(1)CH2 + C2H => (c-)C3H2 + H 	    !   1.0e-10
+(1)CH2 + C2H => (t-)C3H2 + H 	    !   2.0e-10
+(1)CH2 + C2H => (l-)C3H2 + H 	    !   5.0e-11
+(1)CH2 + C2H2 => (3)CH2 + C2H2     !   2.3e-10
+(1)CH2 + C2H2 => C3H3 + H 	    !   7.6e-11*(T_g/300)**(-0.3)
+(1)CH2 + C2H3 => C2H2 + CH3 	    !   3.0e-11
+(1)CH2 + C2H4 => (3)CH2 + C2H4     !   1.4e-10
+(1)CH2 + C2H4 => C3H5 + H 	    !   6.3e-11
+(1)CH2 + C2H5 => C2H4 + CH3 	    !   1.5e-11
+(1)CH2 + C2H5 => C3H6 + H 	    !   1.5e-11
+(1)CH2 + C2H6 => (3)CH2 + C2H6     !   3.6e-11
+(1)CH2 + C2H6 => C2H5 + CH3 	    !   1.9e-10
+(1)CH2 + C3 => C4H + H 	    !   2.0e-10
+(1)CH2 + CH3C2H => C4H5 + H 	    !   9.62e-11
+(1)CH2 + CH2CCH2 => C4H5 + H 	    !   9.62e-11
+(1)CH2 + C3H5 => C4H6 + H 	    !   3.33e-10
+(1)CH2 + C3H5 => C2H4 + C2H3 	    !   6.7e-11
+(1)CH2 + C3H7 => C2H5 + C2H4 	    !   3.0e-11
+(1)CH2 + C3H7 => C3H6 + CH3 	    !   3.0e-12
+
+
+(1)CH2 + C3H8 => C2H5 + C2H5 	    !   1.6e-10
+(1)CH2 + C4H => C4H2 + CH 	    !   3.0e-11
+(1)CH2 + C4H2 => C5H3 + H 	    !   9.62e-11
+(1)CH2 + N2 => (3)CH2 + N2 	    !   1.1e-11*(T_g/300)**0.81
+(1)CH2 + (c-)C3H2 => C4H3 + H 	    !   3.0e-10
+(1)CH2 + (t-)C3H2 => C4H3 + H 	    !   3.0e-10
+(1)CH2 + (l-)C3H2 => C4H3 + H 	    !   3.0e-10
+(3)CH2 + H2 => CH3 + H 	    !   8.0e-12*exp(-4500/T_g)
+(3)CH2 + (3)CH2 => C2H2 + H + H    !   7.0e-11
+(3)CH2 + (3)CH2 => C2H2 + H2 	    !   3.0e-11
+(3)CH2 + (3)CH2 => C2H3 + H	    !   5.0e-12
+(3)CH2 + CH3 => C2H4 + H 	    !   1.0e-10
+(3)CH2 + CH4 => CH3 + CH3 	    !   7.13e-12*exp(-5050/T_g)
+(3)CH2 + C2H => (c-)C3H2 + H       !   4.0e-11
+(3)CH2 + C2H => (t-)C3H2 + H 	    !   2.0e-11
+(3)CH2 + C2H => (l-)C3H2 + H 	    !   3.0e-11
+(3)CH2 + C2H => (c-)C3H + H2 	    !   1.0e-11
+(3)CH2 + C2H => (l-)C3H + H2 	    !   1.0e-11
+(3)CH2 + C2H3 => C2H2 + CH3 	    !   3.0e-11
+(3)CH2 + C2H5 => C2H4 + CH3 	    !   3.0e-11
+(3)CH2 + (c-)C3H => C4H2 + H 	    !   1.0e-10
+(3)CH2 + (l-)C3H => C4H2 + H 	    !   1.0e-10
+(3)CH2 + (c-)C3H2 => C4H3 + H 	    !   1.0e-13
+(3)CH2 + (c-)C3H2 => C2H2 + C2H2   !   1.0e-13
+(3)CH2 + C3H3 => C4H4 + H 	    !   1.0e-10
+(3)CH2 + C3H5 => C4H6 + H 	    !   5.0e-11
+(3)CH2 + C3H5 => C2H3 + C2H4	    !   1.2e-11
+(3)CH2 + C3H7 => C2H4 + C2H5	    !   3.01e-11
+(3)CH2 + C3H7 => C3H6 + CH3	    !   3.0e-12
+(3)CH2 + C4H => C4H2 + CH	    !   3.0e-11
+(3)CH2 + C4H2 => C4H + CH3 	    !   2.16e-11*exp(-2160/T_g)
+(3)CH2 + C4H3 => C4H2 + CH3 	    !   3.0e-11
+CH3 + H2 => CH4 + H 		    !   2.45e-14*((T_g/300)**2.88)*exp(-4600/T_g)
+CH3 + CH3 => C2H5 + H 		    !   1.46e-11*((T_g/300)**0.1)*exp(-5340/T_g)
+CH3 + CH3 => C2H6 		    !   n_N2/(n_N2/(6.8e-11*((T_g/300)**(-0.359)*exp(-30.2/T_g))) + 1.0/(1.8e-26*((T_g/300)**(-3.77)*exp(-61.6/T_g))))
+
+
+CH3 + C2H => C3H3 + H 		    !   1.0e-10
+CH3 + C2H2 => C3H5 		    !   n_N2/(n_N2/(1.0e-12*exp(-3900/T_g)) + 1.0/(3.3e-30*exp(-740/T_g) ))
+CH3 + C2H3 => C2H2 + CH4 	    !   3.3e-11
+CH3 + C2H3 => C3H6 		    !   n_N2/(n_N2/(1.0e-10) + 1.0/(2.4e-27*((T_g/300)**(-3.77)*exp(-61.6/T_g))))
+CH3 + C2H3 => C3H5 + H		    !   1.0e-10
+CH3 + C2H4 => C2H3 + CH4 	    !   1.61e-14*((T_g/300)**3.7)*exp(-4780/T_g)
+CH3 + C2H4 => C3H7 		    !   n_N2/(n_N2/(3.5e-13*exp(-3700/T_g)) + 1.0/(1.39e-29*exp(-562/T_g) ))
+CH3 + C2H5 => C2H4 + CH4	    !   1.91e-12
+CH3 + C2H5 => C3H8 		    !   n_N2/(n_N2/(8.8e-11*((T_g/300)**(-0.61)*exp(-44.8/T_g))) + 1.0/(1.0e-24*((T_g/300)**(-4.47)*exp(-95/T_g))))
+CH3 + C2H6 => C2H5 + CH4 	    !   1.82e-16*(T_g/300)**6*exp(-3040/T_g)
+CH3 + (c-)C3H => C4H3 + H 	    !   1.0e-10
+CH3 + (l-)C3H => C4H3 + H 	    !   1.0e-10
+CH3 + (c-)C3H2 => C4H4 + H 	    !   1.0e-11*exp(-700/T_g)
+CH3 + (c-)C3H2 => C2H3 + C2H2 	    !   1.0e-11*exp(-700/T_g)
+CH3 + (t-)C3H2 => C4H4 + H 	    !   4.0e-11
+CH3 + (t-)C3H2 => C2H3 + C2H2 	    !   4.0e-11
+CH3 + (l-)C3H2 => C4H4 + H 	    !   4.0e-11
+CH3 + (l-)C3H2 => C2H3 + C2H2 	    !   4.0e-11
+CH3 + C3H3 => C4H6 		    !   6.8e-11*exp(130/T_g)
+CH3 + C3H3 => C2H2 + C2H4 	    !   6.8e-11*exp(130/T_g)
+CH3 + CH3C2H => C2H6 + C2H 	    !   8.32e-13*exp(-4430/T_g)
+CH3 + CH2CCH2 => C2H5 + C2H2 	    !   3.32e-13*exp(-4080/T_g)
+CH3 + C3H5 => CH3C2H + CH4 	    !   4.03e-13*((T_g/300)**(-0.32))*exp(66/T_g)
+CH3 + C3H5 => CH2CCH2 + CH4 	    !   4.03e-13*((T_g/300)**(-0.32))*exp(66/T_g)
+CH3 + C3H5 => C4H8 		    !   7.1e-11*((T_g/300)**(-0.54))*exp(117/T_g)
+CH3 + C3H6 => C3H5 + CH4 	    !   2.32e-13*exp(-4390/T_g)
+CH3 + C3H6 => C4H9 		    !   n_N2/(n_N2/(1.34e-13*exp(-3330/T_g))+ 1.0/(1.39e-29*exp(-562/T_g)))
+CH3 + C3H7 => C3H6 + CH4 	    !   7.52e-12*(T_g/300)**0.68
+CH3 + C3H7 => C4H10 		    !   8.9e-11*((T_g/300)**(-0.61))*exp(-44.8/T_g)
+CH3 + C3H8 => C3H7 + CH4 	    !   1.65e-15*((T_g/300)**3.65)*exp(-3600/T_g)
+CH3 + C4H => C5H3 + H 		    !   4.0e-11
+CH3 + C4H2 => C5H5 		    !   n_N2/(n_N2/(1.0e-12*exp(-3900/T_g))+1.0/(3.3e-30*exp(-740/T_g) ))
+CH3 + C4H3 => C4H2 + CH4	    !   1.0e-11
+CH3 + C4H3 => C5H6 		    !   n_N2/(n_N2/(8e-11) + 1.0/(2.2e-21*(T_g/300)**(-3.5) ))
+
+
+CH3 + C4H4 => C4H3 + CH4 	    !   6.61e-13*exp(-2500/T_g)
+CH3 + C4H5 => C4H4 + CH4 	    !   3.0e-11
+CH3 + C6H5 => SOOTC 		    !   6.0e-11
+CH3 + C6H5 => C6H4 + CH4 	    !   2.0e-12
+C2 + H2 => C2H + H 		    !   1.77e-10*exp(-1470/T_g)
+C2 + CH4 => C3H3 + H 		    !   1.2e-11
+C2 + C2H2 => C4H + H 		    !   4.0e-10
+C2 + C2H4 => C4H3 + H 		    !   3.0e-10
+C2 + C2H4 => C2H2 + C2H2 	    !   1.0e-10
+C2 + C2H6 => C3H3 + CH3 	    !   1.3e-10*((T_g/300)**(-0.94))*exp(-44/T_g)
+C2 + C3H8 => C3H3 + C2H5 	    !   2.2e-10*((T_g/300)**(-1.31))*exp(-94/T_g)
+C2 + C4H10 => C3H3 + C3H7 	    !   2.2e-10*((T_g/300)**(-1.31))*exp(-94/T_g)
+C2 + C6H6 => C8H5 + H 		    !   5.2e-10
+C2H + H2 => C2H2 + H 		    !   1.2e-11*exp(-998/T_g)
+C2H + CH4 => C2H2 + CH3 	    !   1.2e-11*exp(-491/T_g)
+C2H + C2H => C2H2 + C2 	    !   3.0e-12
+C2H + C2H2 => C4H2 + H 	    !   1.3e-10
+C2H + C2H3 => C2H2 + C2H2 	    !   1.6e-12
+C2H + C2H3 => C4H3 + H 	    !   3.0e-11
+C2H + C2H4 => C4H4 + H 	    !   1.4e-10
+C2H + C2H5 => C2H4 + C2H2 	    !   3.0e-12
+C2H + C2H5 => C3H3 + CH3 	    !   3.0e-11
+C2H + C2H6 => C2H5 + C2H2 	    !   5.1e-11*exp(-76/T_g)
+C2H + C3 => C5 + H 		    !   3.0e-10
+C2H + (c-)C3H2 => C5H2 + H 	    !   3.0e-10
+C2H + (t-)C3H2 => C5H2 + H 	    !   3.0e-10
+C2H + (l-)C3H2 => C5H2 + H 	    !   3.0e-10
+C2H + CH3C2H => C5H4 + H 	    !   2.1e-10*(T_g/300)**(-0.3)
+C2H + CH2CCH2 => C5H4 + H 	    !   2.04e-10*(T_g/300)**(-0.4)
+C2H + C3H5 => CH2CCH2 + C2H2 	    !   1.2e-11
+C2H + C3H6 => C4H4 + CH3 	    !   2.0e-10
+C2H + C3H7 => C2H5 + C3H3 	    !   2.0e-11
+C2H + C3H7 => C2H2 + C3H6 	    !   1.0e-11
+C2H + C3H8 => C3H7 + C2H2 	    !   9.8e-11*exp(-71/T_g)
+C2H + C4H => C6H + H 		    !   3.0e-12
+C2H + C4H2 => C6H2 + H 	    !   2.54e-10*(T_g/300)**(-0.31)
+C2H + C4H3 => C4H2 + C2H2 	    !   1.6e-12
+C2H + C4H3 => C6H3 + H 	    !   3.0e-11
+C2H + C4H4 => C6H4 + H 	    !   2.0e-10
+C2H + C4H6 => C6H6 + H 	    !   2.0e-10
+C2H + C4H8 => C6H8 + H 	    !   2.1e-10
+C2H + C4H10 => C4H9 + C2H2 	    !   1.23e-10
+C2H + C6H2 => C8H2 + H 	    !   1.3e-10
+C2H + C6H4 => C8H4 + H 	    !   4.0e-10
+C2H + C6H6 => C6H5C2H + H 	    !   3.28e-10*(T_g/300)**(-0.18)
+C2H + C8H2 => SOOTC 		    !   1.3e-10
+C2H3 + H2 => C2H4 + H 		    !   3.45e-14*((T_g/300)**2.56)*exp(-2529/T_g)
+C2H3 + CH4 => C2H4 + CH3 	    !   2.13e-14*((T_g/300)**4.02)*exp(-2750/T_g)
+C2H3 + C2H2 => C4H5 		    !   n_N2/(n_N2/(2.0e-12*exp(-2700/T_g)) + 1.0/(5.3e-29*((T_g/300)**(-5.84)*exp(-2000/T_g))))
+C2H3 + C2H2 => C4H4 + H 	    !   2.0e-12*exp(-2700/T_g)
+C2H3 + C2H3 => C2H4 + C2H2 	    !   3.5e-11
+C2H3 + C2H3 => C4H6 		    !   n_N2/(n_N2/(9.5e-11) + 1.0/(1.0e-26 ))
+
+
+C2H3 + C2H3 => C4H5 + H 	    !   9.5e-11
+C2H3 + C2H4 => C4H6 + H 	    !   7.0e-14*((T_g/300)**2)*exp(-1430/T_g)
+C2H3 + C2H5 => C2H4 + C2H4 	    !   1.8e-11
+C2H3 + C2H5 => C2H6 + C2H2 	    !   9.8e-12
+C2H3 + C2H5 => C4H8 		    !   n_N2/(n_N2/(6.5e-11) + 1.0/(1.0e-30))
+C2H3 + C2H5 => C3H5 + CH3 	    !   6.5e-11
+C2H3 + C2H6 => C2H4 + C2H5 	    !   1.46e-13*((T_g/300)**3.3)*exp(-5280/T_g)
+C2H3 + (c-)C3H2 => C5H4 + H 	    !   3.0e-11
+C2H3 + CH3C2H => C5H6 + H 	    !   3.31e-12*exp(-2520/T_g)
+C2H3 + CH2CCH2 => C5H6 + H 	    !   3.31e-12*exp(-2520/T_g)
+C2H3 + C3H5 => C3H6 + C2H2 	    !   8.0e-12
+C2H3 + C3H5 => C2H4 + CH3C2H 	    !   4.0e-12
+C2H3 + C3H5 => C5H6 + H + H 	    !   8.0e-11
+C2H3 + C3H5 => C2H4 + CH2CCH2      !	2.0e-12
+C2H3 + C3H6 => C3H5 + C2H4 	    !   1.72e-15*((T_g/300)**3.5)*exp(-2360/T_g)
+C2H3 + C3H6 => C4H6 + CH3 	    !   1.2e-12*exp(-2520/T_g)
+C2H3 + C3H6 => C5H8 + H 	    !   1.2e-12*exp(-3240/T_g)
+C2H3 + C3H7 => C3H6 + C2H4 	    !	2.0e-12
+C2H3 + C3H7 => C3H8 + C2H2 	    !	2.0e-12
+C2H3 + C3H7 => C5H10 		    !	n_N2/(n_N2/(1.6e-11) + 1.0/(1.13e-25*((T_g/300)**(-3.75)*exp(-494/T_g))))
+C2H3 + C3H8 => C3H7 + C2H4 	    !	1.46e-13*((T_g/300)**3.3)*exp(-5280/T_g)
+C2H3 + C4H => C4H2 + C2H2 	    !	1.6e-12
+C2H3 + C4H => C6H3 + H 	    !	3.0e-11
+C2H3 + C4H2 => C6H4 + H 	    !	1.2e-11*exp(-1400/T_g)
+C2H3 + C4H3 => C4H4 + C2H2 	    !	2.0e-11
+C2H3 + C4H3 => C4H2 + C2H4 	    !	2.0e-11
+C2H3 + C4H3 => C6H5 + H 	    !	8.0e-11
+C2H3 + C4H5 => C6H6 + H2 	    !	9.94e-20*((T_g/300)**7.07)*exp(1820/T_g)
+C2H5 + H2 => C2H6 + H 		    !	4.23e-15*((T_g/300)**3.6)*exp(-4250/T_g)
+C2H5 + CH4 => C2H6 + CH3 	    !	2.57e-15*((T_g/300)**4.14)*exp(-6320/T_g)
+C2H5 + C2H2 => C2H6 + C2H 	    !	4.5e-13*exp(-11800/T_g)
+C2H5 + C2H2 => C4H7 		    !	n_N2/(n_N2/(5.6e-14*exp(-3520/T_g)) + 1.0/(3.3e-30*exp(-740/T_g)))
+C2H5 + C2H4 => C2H6 + C2H3 	    !	5.67e-14*((T_g/300)**3.13)*exp(-9060/T_g)
+C2H5 + C2H4 => C4H9 		    !	n_N2/(n_N2/(1.8e-13*exp(-3670/T_g)) + 1.0/(1.39e-29*exp(-562/T_g)))
+C2H5 + C2H5 => C2H6 + C2H4 	    !	2.4e-12
+C2H5 + C2H5 => C4H10 		    !	2.0e-11
+C2H5 + (c-)C3H2 => C5H6 + H 	    !	1.0e-12
+C2H5 + (c-)C3H2 => C4H4 + CH3      !	1.0e-12
+C2H5 + (c-)C3H2 => C3H3 + C2H4     !	1.0e-12
+C2H5 + (t-)C3H2 => C5H6 + H 	    !	1.0e-11
+C2H5 + (t-)C3H2 => C4H4 + CH3 	    !	1.0e-11
+C2H5 + (t-)C3H2 => C3H3 + C2H4     !	1.0e-11
+C2H5 + (l-)C3H2 => C5H6 + H 	    !	1.0e-11
+C2H5 + (l-)C3H2 => C4H4 + CH3 	    !	1.0e-11
+C2H5 + (l-)C3H2 => C3H3 + C2H4	    !	1.0e-11
+C2H5 + CH3C2H => C5H9 		    !	n_N2/(n_N2/(5.6e-14*exp(-3520/T_g)) + 1.0/(3.3e-30*exp(-740/T_g)))
+
+
+C2H5 + CH2CCH2 => C5H9 	    !	n_N2/(n_N2/(5.6e-14*exp(-3520/T_g)) + 1.0/(3.3e-30*exp(-740/T_g)))
+C2H5 + C3H5 => CH2CCH2 + C2H6      !	1.6e-12*exp(66/T_g)
+C2H5 + C3H5 => C3H6 + C2H4 	    !	4.3e-12*exp(66/T_g)
+C2H5 + C3H5 => C5H10 		    !	n_N2/(n_N2/(3.33e-13*exp(66/T_g) ) + 1.0/(1.13e-25*((T_g/300)**(-3.75)*exp(-494/T_g))))
+C2H5 + C3H6 => C3H5 + C2H6 	    !	1.73e-15*((T_g/300)**3.5)*exp(-3340/T_g)
+C2H5 + C3H6 => C5H11 		    !	n_N2/(n_N2/(1.7e-13*exp(-3620/T_g)) + 1.0/(1.39e-29*exp(-562/T_g) ))
+C2H5 + C3H7 => C3H8 + C2H4 	    !	1.91e-12
+C2H5 + C3H7 => C3H6 + C2H6 	    !	2.41e-12
+C2H5 + C3H7 => C5H12 		    !	3.3e-11
+C2H5 + C3H8 => C3H7 + C2H6 	    !	1.65e-15*((T_g/300)**3.65)*exp(-4600/T_g)
+C2H5 + C4H => C2H4 + C4H2 	    !	3.0e-12
+C2H5 + C4H => C5H3 + CH3 	    !	3.0e-11
+C2H5 + C4H2 => C6H7 		    !	n_N2/(n_N2/(5.6e-14*exp(-3520/T_g)) + 1.0/(3.3e-30*exp(-740/T_g)))
+C2H5 + C4H3 => C4H4 + C2H4 	    !	1.8e-11
+C2H5 + C4H3 => C4H2 + C2H6 	    !	9.8e-12
+C2H5 + C4H3 => C6H8 		    !	n_N2/(n_N2/(2.5e-11) + 1.0/(1.13e-25*((T_g/300)**(-3.75)*exp(-494/T_g))))
+(c-)C3H + H2 => (c-)C3H2 + H 	    !	6.86e-14*((T_g/300)**2.74)*exp(-4740/T_g)
+(l-)C3H + H2 => (c-)C3H2 + H 	    !	1.39e-13*((T_g/300)**2.38)*exp(-7150/T_g)
+(l-)C3H + H2 => (l-)C3H2 + H 	    !	1.39e-13*((T_g/300)**2.38)*exp(-7150/T_g)
+(l-)C3H + H2 => (t-)C3H2 + H 	    !	1.39e-13*((T_g/300)**2.38)*exp(-7150/T_g)
+(l-)C3H + C2H4 => C5H4 + H 	    !	1.0e-10
+(t-)C3H2 + H2 => C3H3 + H 	    !	8.0e-12*exp(-4500/T_g)
+C3H3 + H2 => CH3C2H + H 	    !	1.42e-13*((T_g/300)**2.38)*exp(-9560/T_g)
+C3H3 + H2 => CH2CCH2 + H 	    !	1.42e-13 * ((T_g/300)**2.38)*exp(-9560/T_g)
+C3H3 + CH4 => CH3C2H + CH3 	    !	1.74e-14 * ((T_g/300)**3.4)*exp(-11700/T_g)
+C3H3 + CH4 => CH2CCH2 + CH3 	    !	1.74e-14 * ((T_g/300)**3.4)*exp(-11700/T_g)
+C3H3 + C2H2 => C5H5 		    !	n_N2/(n_N2/(5.3e-14*exp(-3500/T_g)) + 1.0/(3.3e-30*exp(-740/T_g)))
+C3H3 + C2H4 => C5H6 + H 	    !	1.0e-14*exp(-5780/T_g)
+C3H3 + C2H6 => CH3C2H + C2H5 	    !	5.83e-14*((T_g/300)**3.3)*exp(-9990/T_g)
+
+
+C3H3 + C2H6 => CH2CCH2 + C2H5 	    !   5.83e-14*((T_g/300)**3.3)*exp(-9990/T_g)
+C3H3 + C3H3 => C6H6 		    !   1.5e-11*((T_g/300)**0.101)*exp(295/T_g)
+C3H3 + C3H5 => C6H8 		    !	1.1e-11*((T_g/300)**(-0.166))*exp(312/T_g)
+C3H3 + C3H6 => C6H8 + H 	    !	1.0e-14*exp(-5780/T_g)
+C3H3 + C3H8 => CH3C2H + C3H7 	    !	5.83e-14*((T_g/300)**3.3)*exp(-9990/T_g)
+C3H3 + C3H8 => CH2CCH2 + C3H7 	    !	5.83e-14*((T_g/300)**3.3)*exp(-9990/T_g)
+C3H3 + C4H2 => C7H5 		    !	n_N2/(n_N2/(5.3e-14*exp(-3500/T_g)) + 1.0/(3.3e-30*exp(-740/T_g)))
+C3H5 + H2 => C3H6 + H 		    !	1.42e-13*((T_g/300)**2.38)*exp(-9560/T_g)
+C3H5 + CH4 => C3H6 + CH3 	    !	1.74e-14*((T_g/300)**3.4)*exp(-11700/T_g)
+C3H5 + C2H2 => C5H7 		    !	n_N2/(n_N2/(5.3e-14*exp(-3500/T_g)) + 1.0/(3.3e-30*exp(-740/T_g) ))
+C3H5 + C2H4 => C5H8 + H 	    !	1.0e-14*exp(-5780/T_g)
+C3H5 + C2H6 => C3H6 + C2H5 	    !	5.83e-14*((T_g/300)**3.3)*exp(-9990/T_g)
+C3H5 + CH3C2H => C6H9  	    !	n_N2/(n_N2/(5.3e-14*exp(-3500/T_g)) + 1.0/(3.3e-30*exp(-740/T_g) ))
+C3H5 + CH2CCH2 => C6H9  	    !	n_N2/(n_N2/(5.3e-14*exp(-3500/T_g)) + 1.0/(3.3e-30*exp(-740/T_g) ))
+C3H5 + C3H5 => C3H6 + CH2CCH2 	    !	1.4e-13*exp(132/T_g)
+C3H5 + C3H5 => C6H10 		    !	n_N2/(n_N2/(1.7e-11*exp(132/T_g)) + 1.0/(1.13e-25*((T_g/300)**(-3.75)*exp(-494/T_g))))
+C3H5 + C3H6 => C6H10 + H 	    !	1.0e-14*exp(-5780/T_g)
+C3H5 + C3H7 => C3H6 + C3H6 	    !	2.4e-12*exp(66/T_g)
+C3H5 + C3H7 => CH2CCH2 + C3H8 	    !	1.2e-12*exp(66/T_g)
+C3H5 + C3H7 => C6H12 		    !	n_N2/(n_N2/(3.4e-11*exp(66/T_g)) + 1.0/(1.13e-25*((T_g/300)**(-3.75)*exp(-494/T_g))))
+C3H5 + C3H8 => C3H6 + C3H7 	    !	5.83e-14*((T_g/300)**3.3)*exp(-9990/T_g)
+C3H5 + C4H => CH2CCH2 + C4H2 	    !	1.2e-11
+C3H5 + C4H2 => C7H7 		    !	n_N2/(n_N2/(5.3e-14*exp(-3500/T_g)) + 1.0/(3.3e-30*exp(-740/T_g)))
+C3H5 + C4H3 => C4H4 + CH2CCH2 	    !	2.0e-12
+C3H5 + C4H3 => C4H2 + C3H6 	    !	8.0e-12
+C3H7 + H2 => C3H8 + H 		    !	3.25e-14*((T_g/300)**2.84)*exp(-4600/T_g)
+C3H7 + CH4 => C3H8 + CH3 	    !	3.63e-16*((T_g/300)**4.02)*exp(-5470/T_g)
+C3H7 + C2H2 => C2H4 + C3H5 	    !	1.2e-12*exp(-4530/T_g)
+C3H7 + C2H4 => C3H8 + C2H3 	    !	5.67e-14*((T_g/300)**3.13)*exp(-9060/T_g)
+C3H7 + C2H4 => C5H11 		    !	n_N2/(n_N2/(7.5e-14*exp(-3470/T_g)) + 1.0/(1.39e-29*exp(-562/T_g) ))
+C3H7 + C2H6 => C3H8 + C2H5 	    !	1.22e-15*((T_g/300)**3.82)*exp(-4550/T_g)
+C3H7 + CH3C2H => C6H11 	    !	n_N2/(n_N2/(1.2e-12*exp(-4530/T_g)) + 1.0/(3.3e-30*exp(-740/T_g)))
+C3H7 + CH2CCH2 => C6H11 	    !	n_N2/(n_N2/(1.2e-12*exp(-4530/T_g)) + 1.0/(3.3e-30*exp(-740/T_g) ))
+
+
+C3H7 + C3H6 => C3H8 + C3H5 	    !	1.73e-15*((T_g/300)**3.5)*exp(-3340/T_g)
+C3H7 + C3H6 => C6H13 		    !	n_N2/(n_N2/(7.5e-14*exp(-3470/T_g)) + 1.0/(1.39e-29*exp(-562/T_g)))
+C3H7 + C3H7 => C3H8 + C3H6 	    !	2.8e-12
+C3H7 + C3H7 => C6H14 		    !	n_N2/(n_N2/(1.7e-11 ) + 1.0/(9.77e-22*((T_g/300)**(-6.39)*exp(-301/T_g))))
+C3H7 + C4H => C2H5 + C5H3 	    !	2.0e-11
+C3H7 + C4H => C4H2 + C3H6 	    !	1.0e-11
+C3H7 + C4H2 => C7H9 		    !	n_N2/(n_N2/(5.3e-14*exp(-3500/T_g)) + 1.0/(3.3e-30*exp(-740/T_g) ))
+C3H7 + C4H3 => C4H4 + C3H6 	    !	2.0e-12
+C3H7 + C4H3 => C4H2 + C3H8 	    !	2.0e-12
+C3H7 + C4H3 => C7H10 		    !	n_N2/(n_N2/(1.6e-11 ) + 1.0/(1.13e-25*((T_g/300)**(-3.75)*exp(-494/T_g))))
+C4 + C2H2 => C6H + H 		    !	9e-11
+C4 + C2H4 => C4H2 + C2H2 	    !	2.0e-11
+C4 + C2H4 => C6H3 + H 		    !	8.0e-11
+C4H + H2 => C4H2 + H 		    !	1.2e-11*exp(-998/T_g)
+C4H + CH4 => C4H2 + CH3 	    !	1.6e-11*exp(-610/T_g)
+C4H + C2H2 => C6H2 + H 	    !	1.82e-10*((T_g/300)**(-1.06))*exp(-65.8/T_g)
+C4H + C2H4 => C6H4 + H 	    !	1.95e-10*((T_g/300)**(-0.4))*exp(9.4/T_g)
+C4H + C2H6 => C4H2 + C2H5 	    !	2.87e-11*((T_g/300)**(-1.24))*exp(-25.6/T_g)
+C4H + CH3C2H => C6H2 + CH3 	    !	3.2e-10*((T_g/300)**(-0.82))*exp(-47.5/T_g)
+C4H + CH2CCH2 => C7H4 + H 	    !	1.3e-10
+C4H + C3H6 => C4H3 + CH3C2H 	    !	2.0e-11
+C4H + C3H6 => C6H6 + CH 	    !	2.0e-11
+C4H + C3H6 => C7H6 + H 	    !	1.6e-11*exp(-4.04/T_g)
+C4H + C3H8 => C4H2 + C3H7 	    !	1.05e-10*((T_g/300)**(-1.35))*exp(-56.3/T_g)
+C4H + C4H => C8H + H 		    !	3.0e-12
+C4H + C4H2 => C8H2 + H 	    !	1.3e-10
+C4H + C4H3 => C4H2 + C4H2 	    !	1.6e-12
+C4H + C4H3 => C8H3 + H 	    !	3.0e-11
+C4H + C6H2 => SOOTC 		    !	1.3e-10
+C4H + C8H2 => SOOTC 		    !	1.3e-10
+C4H2X => C4H2 			    !	1.0e1
+C4H2X + H2 => C4H2 + H2	    !	1.4e-15
+C4H2X + CH4 => C4H2 + CH4 	    !	1.4e-15
+C4H2X + C2H2 => C6H2 + H2 	    !	1.75e-13
+C4H2X + C2H2 => C6H2 + H + H 	    !	1.75e-13
+C4H2X + C2H4 => C6H5 + H 	    !	9.8e-14
+C4H2X + C2H4 => C6H4 + H2 	    !	3.69e-13
+C4H2X + CH3C2H => C7H4 + H2 	    !	1.59e-13
+C4H2X + CH3C2H => C6H2 + CH3 + H   !	2.31e-13
+C4H2X + CH3C2H => C5H4 + C2H2 	    !	2.46e-13
+C4H2X + CH3C2H => C5H3 + C2H3 	    !	8.68e-13
+C4H2X + C3H6 => C7H6 + H2 	    !	1.63e-13
+C4H2X + C3H6 => C6H4 + CH3 + H     !	3.76e-13
+C4H2X + C3H6 => C5H6 + C2H2 	    !	2.29e-13
+C4H2X + C3H6 => C5H5 + C2H3 	    !	4.9e-13
+C4H2X + C4H2 => C8H2 + H + H 	    ! 	2.57e-13
+C4H2X + C4H2 => C8H2 + H2 	    !	2.57e-13
+C4H2X + C4H2 => C6H2 + C2H2 	    !	8.17e-13
+C4H2X + C4H2 => C8H3 + H 	    !	1.0e-12
+C4H2X + C4H6 => C6H6 + C2H2 	    !	8.8e-13
+C4H2X + N2 => C4H2 + N2 	    !	1.4e-15
+
+
+C4H3 + H2 => C4H4 + H 		    !	3.31e-14*((T_g/300)**2.56)*exp(-2562/T_g)
+C4H3 + CH4 => C4H4 + CH3 	    !	2.13e-14*((T_g/300)**4.02)*exp(-2750/T_g)
+C4H3 + C2H2 => C6H5 		    !	n_N2/(n_N2/(4.09e-16*((T_g/300)**0.47)*exp(-3020/T_g)) + 1.0/(2.55e-22*((T_g/300)**(-12.8)*exp(-5890/T_g))))
+C4H3 + C4H3 => C4H4 + C4H2 	    !	3.5e-11
+C4H3 + C4H3 => C6H5C2H 	    !	n_N2/(n_N2/(1.2e-10) + 1.0/(1.13e-25*((T_g/300)**(-3.75)*exp(-494/T_g))))
+C4H5 + H2 => C4H6 + H 		    !	4.0e-14*((T_g/300)**2)*exp(-2000/T_g)
+C4H5 + CH4 => C4H6 + CH3 	    !	4.0e-14*((T_g/300)**2)*exp(-1600/T_g)
+C4H5 + C2H2 => C6H6 + H 	    !	1.38e-12*((T_g/300)**1.47)*exp(-2470/T_g)
+C6H + H2 => C6H2 + H 		    !	2.18e-12*((T_g/300)**2.17)*exp(-478/T_g)
+C6H + CH4 => C6H2 + CH3 	    !	1.2e-11*exp(-491/T_g)
+C6H + C2H2 => C8H2 + H 	    !	1.3e-10
+C6H + C2H6 => C6H2 + C2H5 	    !	5.1e-11*exp(-76/T_g)
+C6H + C4H2 => SOOTC 		    !	1.3e-10
+C6H + C6H2 => SOOTC 		    !	1.3e-10
+C6H + C8H2 => SOOTC 		    !	1.3e-10
+C6H5 + H2 => C6H6 + H 		    !	9.91e-14*((T_g/300)**2.43)*exp(-3160/T_g)
+C6H5 + C2H2 => SOOTC + H 	    !	3.25e-12*((T_g/300)**0.21)*exp(-2520/T_g)
+C6H5 + C2H2 => SOOTC 		    !	n_N2/(n_N2/(4.86e-13*((T_g/300)**1.56)*exp(-1910/T_g)) + 1.0/(3.89e-29*((T_g/300)**(-4.08)*exp(403/T_g) )))
+C6H5 + C6H6 => SOOTC + H 	    !	1.35e-12*exp(-2100/T_g)
+N + CH => CN + H 		    !	1.4e-10*(T_g/300)**4.1
+N + (3)CH2 => HCN + H 		    !	5.0e-11*(T_g/300)**0.17
+N + (3)CH2 => HNC + H 		    !	3.0e-11*(T_g/300)**0.17
+N + CH3 => H2CN + H 	   	    !	 5.6e-11
+N + CH3 => HCN + H + H 	    !	6.0e-12
+N + C2 => CN + C 		    !	2.0e-10
+N + C2H => C2N + H 		    !	2.0e-10*(T_g/300)**0.17
+N + C2H => HCN + C 		    !	8.0e-12*(T_g/300)**0.17
+N + C2H => HNC + C 	 	    !	4.0e-12*(T_g/300)**0.17
+N + C2H3 => CH2CN + H 		    !	6.4e-11*(T_g/300)**0.17
+N + C2H3 => NH + C2H2 		    !	1.3e-11*(T_g/300)**0.17
+N + C2H5 => H2CN + CH3 	    !	6.0e-11*(T_g/300)**0.17
+N + C2H5 => NH + C2H4 		    !	4.0e-11*(T_g/300)**0.17
+N + C3 => CN + C2 		    !	1.0e-11*exp(-1000/T_g)
+N + (l-)C3H => CN + C2H 	    !	1.0e-10*(T_g/300)**0.17
+N + (l-)C3H => C3N + H 	    !	1.0e-10*(T_g/300)**0.17
+N + (c-)C3H => CN + C2H 	    !	1.0e-10*(T_g/300)**0.17
+N + (c-)C3H => C3N + H 	    !	1.0e-10*(T_g/300)**0.17
+N + (t-)C3H2 => HC3N + H 	    !	4.0e-11
+N + C3H3 => H2C3N + H 		    !	5.0e-11
+N + C3H5 => C2H3CN + H2 	    !	3.2e-11*(T_g/300)**0.17
+N + C3H5 => HCN + C2H4 	    !	3.2e-11*(T_g/300)**0.17
+N + C3H5 => NH + CH2CCH2 	    !	1.3e-11*(T_g/300)**0.17
+N + C3H7 => H2CN + C2H5 	    !	1.0e-10
+N + C4H => C4N + H 		    !	7.0e-11*(T_g/300)**0.17
+N + C4H => CN + (l-)C3H 	    !	1.0e-11*(T_g/300)**0.17
+N + C4H => HC3N + C 		    !	7.0e-11*(T_g/300)**0.17
+N + C4H3 => CH2C3N + H 	    !	6.0e-11
+N + C4H3 => NH + C4H2 		    !	1.0e-11
+
+
+N + C4H9 => H2CN + C3H7 	    !	6.0e-11*(T_g/300)**0.17
+N + C4H9 => NH + C4H8 		    !	4.0e-11*(T_g/300)**0.17
+N + N => N2 			    !	n_N2/(n_N2/(1.0e-10) + 1.0/(4.1e-34 ))
+N + NH => N2 + H 		    !	2.5e-11*(T_g/300)**0.17
+N + NH2 => N2 + H + H 		    !	1.2e-10*(T_g/300)**0.17
+N + CN => C + N2 		    !	9.0e-11*(T_g/300)**0.42
+N + H2CN => N2 + (3)CH2 	    !	4.0e-11
+N + H2CN => HCN + NH 		    !	5.0e-12
+N + C2N => CN + CN 		    !	1.0e-10
+N + CHCN => HCN + CN 		    !	1.4e-11*(T_g/300)**0.17
+N + CHCN => HNC + CN 		    !	6.0e-12*(T_g/300)**0.17
+N + CHCN => C2N2 + H 		    !	4.0e-11*(T_g/300)**0.17
+N + CH2CN => H2CN + CN 	    !	2.0e-11
+N + CH2CN => HC2N2 + H 	    !	2.0e-11
+N + C4N => C3N + CN 		    !	9.0e-11
+N + HC4N => C4N2 + H 		    !	4.0e-11
+N + HC4N => C3N + HCN 		    !	2.0e-11
+N + CH2C3N => HC3N + HCN 	    !	4.0e-11
+N + CN2 => CN + N2 		    !	6.0e-11*(T_g/300)**0.17
+N(2D) => N 			    !	2.3e-5
+N(2D) + H2 => NH + H 		    !	4.2e-11*exp(-880/T_g)
+N(2D) + CH4 => NH + CH3 	    !	1.3e-11*exp(-755/T_g)
+N(2D) + CH4 => CH2NH + H 	    !	3.5e-11*exp(-755/T_g)
+N(2D) + C2H2 => CHCN + H 	    !	1.6e-10*exp(-270/T_g)
+N(2D) + C2H4 => CH2NCH + H 	    !	1.7e-10*exp(-503/T_g)
+N(2D) + C2H4 => (c)CH2NCH + H      !	6.0e-11*exp(-503/T_g)
+N(2D) + C2H6 => CH2NH + CH3 	    !	1.9e-11
+N(2D) + C3 => CN + C2 		    !	2.3e-10*exp(-503/T_g)
+N(2D) + (c-)C3H2 => HC3N + H 	    !	1.6e-10*exp(-270/T_g)
+N(2D) + (l-)C3H2 => HC3N + H 	    !	1.6e-10*exp(-270/T_g)
+N(2D) + (t-)C3H2 => HC3N + H 	    !	1.6e-10*exp(-270/T_g)
+N(2D) + CH3C2H => CHCN + CH3 	    !	8.0e-11*exp(-270/T_g)
+N(2D) + CH3C2H => C2H3CN + H 	    !	8.0e-11*exp(-270/T_g)
+N(2D) + CH2CCH2 => C2H3CN + H 	    !	2.3e-10*exp(-503/T_g)
+N(2D) + C3H6 => SOOTN 		    !	2.3e-10*exp(-503/T_g)
+N(2D) + C3H8 => CH2NH + C2H5 	    !	3.0e-11
+N(2D) + C4H2 => HCN + (c-)C3H 	    !	4.0e-11*exp(-270/T_g)
+N(2D) + C4H2 => HCN + (l-)C3H 	    !	4.0e-11*exp(-270/T_g)
+N(2D) + C4H2 => HC4N + H 	    !	8.0e-11*exp(-270/T_g)
+N(2D) + C4H4 => SOOTN 		    !	1.6e-10*exp(-270/T_g)
+N(2D) + C4H6 => C4H4NH + H 	    !	1.6e-10*exp(-270/T_g)
+N(2D) + C4H8 => C4H6NH + H 	    !	2.3e-10*exp(-503/T_g)
+N(2D) + C4H10 => CH2NH + C3H7 	    !	3.0e-11
+N(2D) + C6H4 => C5H3CN + H 	    !	2.3e-10*exp(-503/T_g)
+N(2D) + Ar => N + Ar 		    !	1.0e-16
+N(2D) + N2 => N + N2 		    !	1.0e-13*exp(-520/T_g)
+N(2D) + NH3 => N2H2 + H 	    !	5.0e-11
+N(2D) + HCN => CH + N2 	    !	5.0e-11
+N(2D) + HNC => CN2 + H 	    !	2.0e-11
+N(2D) + HNC => CH + N2 	    !	2.0e-11
+
+
+N(2D) + CH2NH => H2CNN + H 	    !	1.0e-10*exp(-503/T_g)
+N(2D) + CH2NH => HNCNH + H 	    !	1.0e-10*exp(-503/T_g)
+N(2D) + CH3NH2 => CH3NNH + H 	    !	2.0e-11
+N(2D) + CH3NH2 => HNCHNH2 + H 	    !	3.0e-11
+N(2D) + CH3CN => CH2CN + NH 	    !	1.3e-11*exp(-755/T_g)
+N(2D) + CH3CN => HNCHCN + H 	    !	3.5e-11*exp(-755/T_g)
+N(2D) + CH3CN => N2 + C2H3 	    !	5.0e-11
+N(2D) + (c)CH2NCH => N2 + C2H3     !	2.3e-10*exp(-503/T_g)
+N(2D) + HC3N => N2 + (c-)C3H 	    !	1.5e-11
+N(2D) + HC3N => N2 + (l-)C3H 	    !	1.5e-11
+N(2D) + HC3N => C2N + HCN 	    !	3.0e-11
+N(2D) + HC5N => N2 + C5H 	    !	3.0e-11
+N(2D) + HC5N => C4N + HCN 	    !	3.0e-11
+N(2D) + C2H3CN => HNCCHCN + H 	    !	2.3e-10*exp(-503/T_g)
+N(2D) + C2H3CN => N2 + C3H3 	    !	4.0e-11
+N(2D) + C2H5CN => CH2NH + CH2CN    !	1.9e-11
+N(2D) + C2H5CN => C3H5 + N2 	    !	4.0e-11
+N(2D) + CH3C3N => SOOTN 	    !	3.0e-11
+N(2D) + C2N2 => C2N + N2 	    !	3.0e-11
+N(2D) + C4N2 => C4N + N2 	    !	3.0e-11
+NH + H => N + H2 		    !	2.2e-12*((T_g/300)**1.55)*exp(-103/T_g)
+NH + CH => HCN + H 		    !	5.0e-11
+NH + CH => HNC + H 		    !	5.0e-11
+NH + (3)CH2 => H2CN + H 	    !	3.0e-11
+NH + (3)CH2 => HCN + H + H 	    !	3.0e-11
+NH + (3)CH2 => HNC + H2 	    !	5.0e-12
+NH + CH3 => CH2NH + H 		    !	1.3e-10*(T_g/300)**0.17
+NH + C2 => HNC + C 		    !	1.0e-10
+NH + C2H => CHCN + H 		    !	1.0e-10
+NH + C2H2 => CH2CN + H 	    !	8.3e-10*exp(-7096/T_g)
+NH + C2H3 => CH3CN + H 	    !	1.0e-10
+NH + C2H3 => HNC + CH3 	    !	1.0e-11
+NH + C2H3 => NH2 + C2H2 	    !	1.0e-11
+NH + C2H4 => H2CN + CH3 	    !	3.0e-12*exp(-6735/T_g)
+NH + C2H5 => NH2 + C2H4 	    !	1.0e-11
+NH + C2H5 => CH3CHNH + H 	    !	6.0e-11*(T_g/300)**0.17
+
+
+NH + (c-)C3H2 => H2C3N + H 	    !	1.0e-11
+NH + C3H3 => C2H3CN + H 	    !	1.0e-10
+NH + NH => N2 + H + H 		    !	2.0e-10
+NH + NH2 => N2H2 + H 		    !	1.0e-10*(T_g/300)**0.17
+NH + CN => CN2 + H 		    !	1.0e-10
+NH + CN => N2 + CH 		    !	1.0e-10
+NH + H2CN => NH2 + HCN 	    !	2.0e-11
+NH + H2CN => H2CNN + H 	    !	2.0e-11
+NH2 + H => NH3 		    !	n_N2/(n_N2/(3.5e-12) + 1.0/(1.0e-33 ))
+NH2 + H2 => NH3 + H 		    !	2.09e-12*exp(-4280/T_g)
+NH2 + H => NH + H2 		    !	2.0e-11*exp(-2400/T_g)
+NH2 + C => HCN + H 		    !	3.0e-11*((T_g/300)**(-0.2))*exp(6/T_g)
+NH2 + C => HNC + H 		    !	3.0e-11*((T_g/300)**(-0.2))*exp(6/T_g)
+NH2 + CH3 => CH3NH2 		    !	n_N2/(n_N2/(1.3e-10*(T_g/300)**0.42) + 1.0/(1.8e-27*(T_g/300)**(-3.85) ))
+NH2 + CH4 => NH3 + CH3 	    !	3.99e-14*((T_g/300)**3.59)*exp(-4540/T_g)
+NH2 + C2H2 => NH3 + C2H 	    !	1.11e-13*exp(-1850/T_g)
+NH2 + C2H3 => NH3 + C2H2 	    !	2.0e-11
+NH2 + C2H3 => C2H3NH + H 	    !	8.0e-11
+NH2 + C2H4 => NH3 + C2H3 	    !	3.42e-14*exp(-1320/T_g)
+NH2 + C2H5 => NH3 + C2H4 	    !	1.0e-11
+NH2 + C2H5 => CH3NH + CH3 	    !	6.0e-11
+NH2 + C2H6 => NH3 + C2H5 	    !	6.14e-13*exp(-3600/T_g)
+NH2 + NH2 => N2H4 		    !	n_N2/(n_N2/(8.0e-11) + 1.0/(5.7e-29 ))
+NH2 + N2H2 => NH3 + N2H 	    !	1.62e-15*((T_g/300)**4.05)*exp(-810/T_g)
+NH2 + N2H4 => N2H3 + NH3 	    !	2.0e-11*exp(-1100/T_g)
+NH2 + H2CN => HCN + NH3 	    !	5.4e-11*((T_g/300)**(-1.1))*exp(-60/T_g)
+NH2 + H2CN => H2CNNH2 		    !	n_N2/(n_N2/(1.0e-10) + 1.0/(1.0e-28*(T_g/300)**(-3.5) ))
+NH3 + H => NH2 + H2 		    !	4.23e-14*((T_g/300)**3.93)*exp(-4060/T_g)
+NH3 + CH => CH2NH + H 		    !	1.69e-10*((T_g/300)**(-0.56))*exp(-28/T_g)
+NH3 + CH3 => NH2 + CH4 	    !	5.1e-14*((T_g/300)**2.86)*exp(-7340/T_g)
+NH3 + C2H => NH2 + C2H2 	    !	2.9e-11*(T_g/300)**(-0.9)
+N2H + H => N2 + H2 		    !	1.0e-10*(T_g/300)**0.17
+N2H2 + H => N2H + H2 		    !	4.58e-13*((T_g/300)**2.63)*exp(-115/T_g)
+N2H3 + H => NH2 + NH2 		    !	8.0e-11*exp(-1000/T_g)
+N2H3 + H => N2H2 + H2 		    !	1.7e-11
+N2H3 + N2H3 => N2H4 + N2 + H2 	    !	6.0e-11
+N2H4 + H => N2H3 + H2 		    !	9.86e-12*exp(-1200/T_g)
+N2H4 + CH3 => N2H3 + CH4 	    !	1.66e-13*exp(-2520/T_g)
+CN + H => HCN 			    !	n_N2/(n_N2/(1.73e-10*(T_g/300)**(-0.5)) + 1.0/(8.52e-30*((T_g/300)**(-2.2)*exp(-567/T_g))))
+
+
+CN + H2 => HCN + H 		    !	4.12e-13*((T_g/300)**2.87)*exp(-820/T_g)
+CN + CH => C2N + H 		    !	1.0e-10*(T_g/300)**(-0.17)
+CN + CH => HCN + C 		    !	1.0e-10*(T_g/300)**(-0.17)
+CN + (3)CH2 => HCN + CH 	    !	5.0e-11
+CN + (3)CH2 => CHCN + H 	    !	5.0e-11
+CN + (3)CH2 => C2N + H2 	    !	5.0e-11
+CN + CH3 => CH2CN + H 		    !	1.0e-10
+CN + CH4 => HCN + CH3 		    !	6.2e-12*exp(-721/T_g)
+CN + C2H2 => HC3N + H 		    !	2.72e-10*((T_g/300)**(-0.52))*exp(-19/T_g)
+CN + C2H4 => C2H3CN + H 	    !	2.67e-10*((T_g/300)**(-0.69))*exp(-31/T_g)
+CN + C2H6 => HCN + C2H5 	    !	2.08e-11*((T_g/300)**0.22)*exp(58/T_g)
+CN + (c-)C3H2 => HC4N + H 	    !	2.0e-10
+CN + (l-)C3H2 => HC4N + H 	    !	2.0e-10
+CN + (t-)C3H2 => HC4N + H 	    !	2.0e-10
+CN + CH3C2H => HC3N + CH3 	    !	1.0e-10
+CN + CH3C2H => CH3C3N + H 	    !	1.0e-10
+CN + CH2CCH2 => HC3N + CH3 	    !	1.0e-10
+CN + CH2CCH2 => CH3C3N + H 	    !	1.0e-10
+CN + C3H6 => C3H5CN + H 	    !	1.5e-10
+CN + C3H6 => C2H3CN + CH3 	    !	1.5e-10
+CN + C3H8 => HCN + C3H7 	    !	2.14e-11*((T_g/300)**1.19)*exp(378/T_g)
+CN + C4H2 => HC5N + H 		    !	4.0e-10
+CN + C4H4 => C4H3CN + H 	    !	2.0e-10
+CN + C4H6 => SOOTN 		    !	2.57e-10*exp(169/T_g)
+CN + C4H8 => C2H3CN + C2H5 	    !	1.5e-10
+CN + C4H10 => HCN + C4H9 	    !	2.14e-11*((T_g/300)**1.19)*exp(378/T_g)
+CN + C6H6 => C6H5CN + H 	    !	2.8e-10
+CN + NH3 => HCN + NH2 		    !	2.77e-11*(T_g/300)**(-1.14)
+CN + CN => C2N2 		    !	n_N2/(n_N2/(9.4e-12) + 1.0/(3.22e-29*(T_g/300)**(-2.61)) )
+CN + HCN => C2N2 + H 		    !	4.3e-13*((T_g/300)**1.71)*exp(-770/T_g)
+CN + HNC => C2N2 + H 		    !	2.0e-10
+CN + CH2NH => NCCHNH + H 	    !	5.0e-11
+CN + CH2NH => H2CNCN + H 	    !	5.0e-11
+CN + CH3NH2 => CH3NH + HCN 	    !	8.0e-11
+CN + CH3CN => C2N2 + CH3 	    !	4.0e-11*exp(-1190/T_g)
+CN + CH3CN => CH2CN + HCN 	    !	2.46e-11*exp(-1190/T_g)
+CN + (c)CH2NCH => SOOTN 	    !	3.0e-11
+CN + C2H3CN => C4N2H2 + H 	    !	3.02e-11*exp(103/T_g)
+CN + C2H5CN => C2H4CN + HCN 	    !	2.08e-11*((T_g/300)**0.22)*exp(58/T_g)
+CN + C3N => C4N2 		    !	n_N2/(n_N2/(9.4e-12) + 1.0/(3.22e-29*(T_g/300)**(-2.61)) )
+CN + HC3N => C4N2 + H 		    !	1.79e-11*(T_g/300)**(-0.67)
+CN + HC5N => C6N2 + H 		    !	3.0e-11*(T_g/300)**(-0.7)
+CN + C4N2 => SOOTN 		    !	n_N2/(n_N2/(3.0e-11) + 1.0/(1.0e-26 ))
+HCN + H => H2CN 		    !	n_N2/(n_N2/(9.8e-12*exp(-2076/T_g)) + 1.0/(1.0e-34))
+
+
+HCN + CH => CHCN + H 		    !	1.4e-10*(T_g/300)**(-0.17)
+HCN + CH => C2N + H2 		    !	1.4e-10*(T_g/300)**(-0.17)
+HCN + (3)CH2 => CH2CN + H 	    !	1.5e-12*exp(-3330/T_g)
+HCN + C2 => C3N + H 		    !	2.0e-10*(T_g/300)**0.17
+HCN + C2H => HC3N + H 		    !	5.3e-12*exp(-769/T_g)
+HCN + C2H3 => C2H3CN + H 	    !	1.0e-12*exp(-2300/T_g)
+HCN + C4H => HC5N + H 		    !	5.3e-12*exp(-769/T_g)
+HCN + C3N => C4N2 + H 		    !	1.0e-11
+HNC + H => HCN + H 		    !	3.0e-11*exp(-800/T_g)
+HNC + C => HCN + C 		    !	1.6e-10
+HNC + C => C2N + H 		    !	4.0e-11
+HNC + CH => CHCN + H 		    !	1.4e-10*(T_g/300)**(-0.17)
+HNC + CH => C2N + H2 		    !	1.4e-10*(T_g/300)**(-0.17)
+HNC + C2 => C3N + H 		    !	2.0e-10
+HNC + C2H => HC3N + H 		    !	2.0e-10
+HNC + C2H3 => C2H3CN + H 	    !	1.0e-12*exp(-1800/T_g)
+HNC + C3N => C4N2 + H 		    !	2.0e-10
+H2CN + H => HCN + H2 		    !	6.0e-11
+H2CN + C => C2N + H2 		    !	3.0e-11
+H2CN + C => HCN + CH 		    !	3.0e-11
+H2CN + C => CHCN + H 		    !	3.0e-11
+H2CN + H => CH2NH 		    !	n_N2/(n_N2/(6.0e-11) + 1.0/(1.0e-29 ))
+H2CN + H => HNC + H2 		    !	0.2*6.0e-11
+H2CN + CH3 => CH4 + HCN 	    !	3.0e-11
+H2CN + CH3 => CH2NCH3 		    !	6.0e-11
+H2CN + H2CN => CH2NH + HCN 	    !	7.0e-12
+CH2NH + H => H2CN + H2 	    !	1.6e-11*exp(-2600/T_g)
+CH2NH + H => CH3NH 		    !	n_N2/(n_N2/(6.07-13*((T_g/300)**5.31)*exp(174/T_g)) + 1.0/(4.0e-29*((T_g/300)**(-1.51)*exp(-72.9/T_g)) ))
+CH2NH + C => HCN + (3)CH2 	    !	1.0e-10
+CH2NH + C => CH2CN + H 	    !	1.0e-10
+CH2NH + CH => CH3CN + H 	    !	2.0e-10
+CH2NH + (1)CH2 => H2CN + CH3  	    !	3.0e-10
+CH2NH + C2H => C2H3CN + H 	    !	1.4e-10
+CH3NH + H => CH2NH + H2 	    !	3.0e-12
+
+
+CH3NH + H => CH3NH2 		    !	n_N2/(n_N2/(1.07e-10) + 1.0/(2.0e-29*(T_g/300)**1.5 ))
+CH3NH + H => CH3 + NH2 	    !	1.07e-10
+CH3NH + CH3 => CH2NH + CH4 	    !	1.91e-12
+CH3NH + CH3 => CH3NHCH3 	    !	n_N2/(n_N2/(8.8e-11*((T_g/300)**(-0.61)*exp(-34.8/T_g))) + 1.0/(4e-24*((T_g/300)**(-4.47)*exp(-95/T_g))))
+CH3NH2 + CH => C2H3NH2 + H 	    !	2.0e-10
+CH3NH2 + CH3 => CH3NH + CH4 	    !	5.89e-15*exp(-2870/T_g)
+CH3NH2 + C2H => CH3NH + C2H2 	    !	3.0e-11*(T_g/300)**(-0.9)
+HNCNH + H => NH2 + HCN 	    !	6.0e-16*exp(-1920/T_g)
+C2N + H => HCN + C 		    !	2.0e-10*(T_g/300)**0.17
+C2N + C => CN + C2 		    !	3.0e-11
+C2N + C => N + C3 		    !	1.0e-11
+C2N + CH3 => H2C3N + H 	    !	6.0e-11
+C2N + CH4 => C2H3CN + H 	    !	7.0e-12*exp(-1400/T_g)
+C2N + C2H2 => HC4N + H 	    !	1.0e-10
+C2N + C2H4 => CH3C3N + H 	    !	1.0e-10
+CHCN + H => C2N + H2 		    !	6.0e-11
+CHCN + CH3 => C2H3CN + H 	    !	3.0e-11
+CHCN + CHCN => C4N2 + H2 	    !	1.0e-11
+CHCN + CHCN => HC4N2 + H 	    !	3.0e-11
+CH2CN + H => CH3CN 		    !	n_N2/(n_N2/(2.0e-10) + 1.0/(1.1e-25*(T_g/300)**(-1.8) ))
+CH2CN + C => HC3N + H		    !	1.0e-10
+CH2CN + CH3 => C2H5CN 		    !	n_N2/(n_N2/(6.0e-11) + 1.0/(2.0e-23*(T_g/300)**(-3.5)))
+CH2CN + C2H3 => CH3CN + C2H2 	    !	3.0e-11
+CH2CN + C2H3 => CHCN + C2H4 	    !	1.0e-12
+CH2CN + C2H3 => SOOTN 		    !	n_N2/(n_N2/(8.0e-11) + 1.0/(6.0e-20*(T_g/300)**(-3.5)))
+CH2CN + C2H5 => CH3CN + C2H4 	    !	2.0e-12
+CH2CN + C2H5 => SOOTN 		    !	8.0e-11
+CH2CN + C3H7 => SOOTN 		    !	6.0e-11
+CH3CN + H => CH2CN + H2 	    !	1.66e-13*exp(-1500/T_g)
+CH3CN + CH => C2H3CN + H 	    !	2.0e-10
+CH3CN + C2H => CH2CN + C2H2 	    !	1.8e-11*exp(-766/T_g)
+CH3CN + C2H3 => C2H3CN + CH3 	    !	1.0e-12*exp(-2200/T_g)
+CH2NCH + H => HCN + CH3 	    !	5.0e-11
+CH2NCH + CH3 => HCN + C2H5 	    !	2.0e-11
+(c)CH2NCH + H => CH2NCH + H 	    !	7.0e-11*exp(-1600/T_g)
+(c)CH2NCH + H => CH3CN + H 	    !	3.0e-11*exp(-1600/T_g)
+
+
+(c)CH2NCH + C2H => SOOTN 	    !	2.0e-10
+CH2NCH3 + H => CH2NH + CH3 	    !	1.7e-11*exp(-1200/T_g)
+C3N + H => HC3N 		    !	2.0e-10
+C3N + H2 => HC3N + H 		    !	4.0e-11*exp(-1000/T_g)
+C3N + C => CN + C3 		    !	2.4e-10
+C3N + CH3 => CH2C3N + H 	    !	6.0e-11
+C3N + CH4 => HC3N + CH3 	    !	3.0e-11
+C3N + C2H2 => HC5N + H 	    !	2.0e-10
+C3N + C2H4 => C2H3C3N + H 	    !	2.0e-10
+C3N + C2H6 => HC3N + C2H5 	    !	2.0e-10
+C3N + HC3N => C6N2 + H 	    !	1.0e-10
+HC3N + H => H2C3N 		    !	n_N2/(n_N2/(1.1e-12*exp(-500/T_g)) + 1.0/(6.0e-28*((T_g/300)**(-2.93)*exp(-176/T_g))))
+HC3N + C => C4N + H 		    !	1.0e-10
+HC3N + CH => HC4N + H 		    !	2.0e-10
+HC3N + C2H => HC5N + H 	    !	3.6e-11*(T_g/300)**(-1.04)
+HC3N + C2H3 => C2H3C3N + H 	    !	1.0e-12*exp(-1200/T_g)
+H2C3N + H => HC3N + H2 	    !	1.0e-11
+H2C3N + H => C2H3CN 		    !	n_N2/(n_N2/(1.2e-10) + 1.0/(1.1e-25 ))
+H2C3N + H => HCN + C2H2 	    !	0.8*1.2e-10
+H2C3N + H => HC3N + H2 	    !	0.2*1.2e-10
+H2C3N + CH3 => HC3N + CH4 	    !	4.0e-12
+H2C3N + CH3 => C3H5CN 		    !	n_N2/(n_N2/(6.0e-11) + 1.0/(1.0e-25 ))
+H2C3N + CH3 => H4C4N + H 	    !	6.0e-11
+H2C3N + C2H3 => HC3N + C2H4 	    !	1.0e-11
+H2C3N + C2H3 => C2H3CN + C2H2 	    !	1.0e-11
+H2C3N + C2H3 => SOOTN 		    !	8.0e-11
+H2C3N + C2H5 => C2H3CN + C2H4 	    !	1.0e-11
+H2C3N + C2H5 => SOOTN	 	    !	6.0e-11
+H2C3N + C3H7 => SOOTN 		    !	6.0e-11
+C2H3CN + H => C2H4CN 		    !	6.07e-13*((T_g/300)*5.31)*exp(174/T_g)
+C2H3CN + C => CH2C3N + H 	    !	2.0e-10
+C2H3CN + CH => HC3N + CH3 	    !	2.0e-10
+C2H3CN + C2H => C4H3CN + H 	    !	1.4e-10
+C2H4CN + H => C2H3CN + H2 	    !	3.0e-12
+C2H4CN + H => C2H5CN 		    !	n_N2/(n_N2/(1.07e-10) + 1.0/(1.0e-26*(T_g/300)**(-1.5) ))
+C2H4CN + H => CH2CN + CH3 	    !	1.07e-10
+C2H4CN + CH3 => C2H3CN + CH4 	    !	4.0e-12
+C2H4CN + CH3 => C3H7CN 	    !	3.0e-11
+
+
+C2H4CN + C2H3 => C2H3CN + C2H4     !	4.0e-12
+C2H4CN + C2H3 => C2H5CN + C2H2     !	8.0e-12
+C2H4CN + C2H3 => SOOTN 	    !	8.0e-11
+C2H4CN + C2H5 => C2H5CN + C2H4     !	4.0e-12
+C2H4CN + C2H5 => SOOTN 	    !	8.0e-11
+C2H4CN + C3H7 => SOOTN 	    !	6.0e-11
+C2H5CN + C => H4C4N + H 	    !	2.0e-10
+C2H5CN + CH => CH2CN + C2H4 	    !	1.2e-10
+C2H5CN + CH => C2H3CN + CH3 	    !	8.0e-11
+C2H5CN + C2H => C2H4CN + C2H2 	    !	3.5e-11
+C2H5CN + C2H => HC3N + C2H5 	    !	1.0e-11*exp(-600/T_g)
+C2H5CN + C2H3 => C2H3CN + C2H5     !	1.0e-12*exp(-2000/T_g)
+C4N + CH3 => H2C5N + H 	    !	3.0e-11
+HC4N + H => CH2C3N 		    !	2.0e-10
+HC4N + CH3 => C4H3CN + H 	    !	3.0e-11
+CH2C3N + H => HC4N + H2 	    !	2.0e-12
+CH2C3N + H => CH3C3N 		    !	1.0e-10
+CH2C3N + CH3 => HC4N + CH4 	    !	1.0e-12
+CH2C3N + CH3 => C2H5C3N 	    !	6.0e-11
+CH3C3N + H => H4C4N 		    !	n_N2/(n_N2/(1.1e-12*exp(-500/T_g)) + 1.0/(3.0e-26*((T_g/300)**(-2.93)*exp(-176/T_g))))
+CH3C3N + C2H => HC5N + CH3 	    !	4.0e-11*(T_g/300)**(-1)
+CH3C3N + C2H3 => C2H3C3N + CH3     !	1.0e-12*exp(-1600/T_g)
+CH3C3N + CN => C4N2 + CH3 	    !	1.79e-11*(T_g/300)**(-0.67)
+H4C4N + H => CH3C3N + H2 	    !	1.0e-11
+H4C4N + H => C3H5CN 		    !	n_N2/(n_N2/(1.0e-10 ) +1.0/(2.0e-21*(T_g/300)**(-1.5)))
+H4C4N + H => HCN + CH3C2H 	    !	0.8*1.0e-10
+H4C4N + H => CH3C3N + H2 	    !	0.2*1.0e-10
+H4C4N + CH3 => CH3C3N + CH4 	    !	4.03e-13*((T_g/300)**(-0.32))*exp(66/T_g)
+H4C4N + CH3 => C4H7CN 		    !	7.0e-11*((T_g/300)**(-0.54))*exp(117/T_g)
+C3H5CN + H => C3H6CN 		    !	n_N2/(n_N2/(7.02e-12*((T_g/300)**1.16)*exp(-440/T_g)) + 1.0/(1.4e-25*((T_g/300)**(-2.48)*exp(-191/T_g))))
+C3H6CN + H => C3H5CN + H2 	    !	3.0e-12
+C3H6CN + H => C3H7CN 		    !	n_N2/(n_N2/(1.0e-10 ) + 1.0/(1.0e-24 ))
+C3H6CN + H => C2H4CN + CH3 	    !	1.0e-10
+C3H6CN + CH3 => SOOTN 		    !	6.0e-11
+C3H6CN + CH3 => C3H5CN + CH4 	    !	2.0e-12
+C3H7CN + C2H => C3H6CN + C2H2 	    !	6.0e-11
+C3H7CN + C2H3 => C2H3CN + C3H7     !	1.0e-12*exp(-1800/T_g)
+C5N + H2 => HC5N + H 		    !	4.0e-11*exp(-1000/T_g)
+C5N + CH4 => HC5N + CH3 	    !	4.0e-11
+C5N + C2H2 => HC7N + H 	    !	2.0e-10
+C5N + C2H4 => C2H3C5N + H 	    !	2.0e-10
+C5N + C2H6 => HC5N + C2H5 	    !	2.0e-10
+C5N + HCN => C6N2 + H 		    !	1.0e-11
+HC5N + H => H2C5N 		    !	n_N2/(n_N2/(1.6e-12*((T_g/300)**5.55)*exp(153/T_g)) + 1.0/(3.0e-25*((T_g/300)**(-2.93)*exp(-176/T_g))))
+HC5N + C2H => HC7N + H 	    !	3.6e-11*(T_g/300)**(-1.04)
+H2C5N + H => HC5N + H2 	    !	1.0e-11
+H2C5N + H => C4H3CN 		    !	n_N2/(n_N2/(1.2e-10) + 1.0/(1.0e-23 ))
+
+
+H2C5N + H => HC3N + C2H2 	    !	0.5*1.2e-10
+H2C5N + H => HC5N + H2 	    !	0.5*1.2e-10
+C4H3CN + H => C4H4CN 		    !	n_N2/(n_N2/(7.02e-12*((T_g/300)**1.16)*exp(-440/T_g) ) + 1.0/(1.4e-25*((T_g/300)**(-2.48)*exp(-191/T_g))))
+C4H3CN + N(2D) => SOOTN 	    !	3.0e-11
+C4H4CN + H => C4H3CN + H2 	    !	1.0e-11
+C4H4CN + H => C2H5C3N 		    !	n_N2/(n_N2/(1.0e-10) + 1.0/(1.0e-24 ))
+C4H4CN + H => CH2C3N + CH3 	    !	1.0e-10
+C4H4CN + CH3 => C4H3CN + CH4 	    !	1.0e-12
+C4H4CN + CH3 => C3H7C3N 	    !	n_N2/(n_N2/(6.0e-11) + 1.0/(1.0e-20*(T_g/300)**(-3.5) ))
+C2H5C3N + N(2D) => SOOTN 	    !	3.0e-11
+C2H5C3N + H => SOOTN 		    !	n_N2/(n_N2/(1.1e-12*exp(-500/T_g) ) + 1.0/(6.0e-26*((T_g/300)**(-2.93)*exp(-176/T_g))))
+C3H7C3N + N(2D) => SOOTN 	    !	3.0e-11
+C3H7C3N + H => SOOTN 		    !	n_N2/(n_N2/(1.1e-12*exp(-500/T_g)) + 1.0/(1.8e-25*((T_g/300)**(-2.93)*exp(-176/T_g))))
+N2 + C => CN2 			    !	n_N2/(n_N2/(1.0e-11) + 1.0/(3.1e-33*(T_g/300)**(-1.5)))
+N2 + CH => HCNN 		    !	n_N2/(n_N2/(1.8e-12*(T_g/300)**(-1.5)) + 1.0/(1.9e-31*(T_g/300)**(-2.2) ))
+CN2 + H => CH + N2 		    !	2.0e-10
+HCNN + H => (1)CH2 + N2 	    !	2.0e-10
+H2CNN + H => CH3 + N2 		    !	1.6e-11
+C2N2 + H => HC2N2 		    !	n_N2/(n_N2/(1.17e-14*((T_g/300)**8.41)*exp(359/T_g) ) + 1.0/(2.0e-31*((T_g/300)**(-1.07)*exp(-83.8/T_g))))
+C2N2 + C => C3 + N2 		    !	6.0e-11
+C2N2 + CH => C2N + HCN 	    !	2.0e-10
+C2N2 + C2H => HC3N + CN 	    !	5.3e-12*exp(-769/T_g)
+C4N2 + H => HC4N2 		    !	n_N2/(n_N2/(2.2e-14*((T_g/300)**8.41)*exp(359/T_g)) + 1.0/(4.3e-28*((T_g/300)**(-1.51)*exp(-72.9/T_g))))
+C4N2 + C => C5 + N2 		    !	6.0e-11
+C4N2 + CH => C4N + HCN 	    !	2.0e-10
+C4N2 + C2H => HC5N + CN 	    !	2.1e-10*(T_g/300)**(-0.3)
+HC2N2 + H => C2N2 + H2 	    !	1.0e-11
+HC2N2 + H => HCN + HNC 	    !	6.0e-11
+HC4N2 + H => C4N2 + H2 	    !	1.0e-11
+HC4N2 + H => HC3N + HNC 	    !	6.0e-11
+O + (1)CH2 => HCO + H 		    !	1.0e-11
+O + (1)CH2 => CO + H + H 	    !	5.0e-11
+O + (1)CH2 => CO + H2 		    !	6.0e-11
+
+
+O + (3)CH2 => HCO + H 		    !	1.0e-11
+O + (3)CH2 => CO + H + H 	    !	5.0e-11
+O + (3)CH2 => CO + H2 		    !	6.0e-11
+O + CH3 => CO + H2 + H 	    !	2.9e-11
+O + CH3 => H2CO + H 		    !	1.1e-10
+O + C2H2 => CO + (3)CH2 	    !	6.6e-12*exp(-1600/T_g)
+O + C2H2 => HCCO + H 	    	    !	2.6e-11*exp(-1600/T_g)
+O + C2H3 => CH3 + CO 	   	    !	6.0e-11
+O + C2H3 => OH + C2H2 	   	    !	1.0e-11
+O + C2H4 => CH3CO + H 	   	    !	3.0e-14*((T_g/300)**1.88)*exp(-92/T_g)
+O + C2H4 => CH3CO + H 	   	    !	4.8e-13*((T_g/300)**1.88)*exp(-92/T_g)
+O + C2H4 => HCO + CH3 	   	    !	5.0e-13*((T_g/300)**1.88)*exp(-92/T_g)
+O + C2H4 => H2CO + (3)CH2 	    !	1.0e-13*((T_g/300)**1.88)*exp(-92/T_g)
+O + C2H4 => CH2CO + H2 	    !	3.0e-14*((T_g/300)**1.88)*exp(-92/T_g)
+O + C2H5 => H2CO + CH3 	    !	5.0e-11
+O + C2H5 => CH3CHO + H 	    !	6.0e-11
+O + C2H5 => OH + C2H4 		    !	3.0e-11
+O + C3 => CO + C2 		    !	3.0e-11
+O + C3H6 => HCO + C2H5 	    !	1.0e-12
+O + C3H6 => CH3CO + CH3 	    !	1.1e-12
+O + C3H6 => SOOTC + H 		    !	1.8e-12
+O + C3H6 => SOOTC + H2 	    !	6.0e-14
+O + C4H2 => CO + (t-)C3H2 	    !	1.31e-11*exp(-678/T_g)
+O + NH => NO + H 		    !	6.6e-11
+O + H2CN => OH + HCN 		    !	4.0e-11
+O + H2CN => OH + HNC 		    !	1.0e-11
+O + H2CN => HNCO + H 		    !	5.0e-11
+O + HCCO => H + CO + CO 	    !	1.6e-10
+O + HCCO => CH + CO2		    !	4.9e-11*exp(-560/T_g)
+O + HNO => OH + NO 		    !	3.8e-11
+O(1D) + H2 => OH + H 		    !	1.1e-10
+O(1D) + CH4 => OH + CH3 	    !	1.05e-10
+O(1D) + CH4 => CH3O + H 	    !	3.5e-11
+O(1D) + CH4 => H2CO + H2 	    !	7.5e-12
+O(1D) + N2 => O + N2 		    !	2.15e-11*exp(110/T_g)
+OH + H2 => H2O + H 		    !	2.8e-12*exp(-1800/T_g)
+OH + CH3 => H2O + (1)CH2 	    !	3.2e-11
+OH + CH3 => H2CO + H2 		    !	8.0e-12
+OH + CH3 => CH3OH 		    !	n_N2/(n_N2/(1.2e-10*(T_g/300)**(-0.49)) + 1.0/(2.0e-26*((T_g/300)**(-6)*exp(-1000/T_g))))
+OH + CH4 => H2O + CH3 		    !	1.85e-12*exp(-1690/T_g)
+OH + C2H2 => C2H2OH 		    !	n_N2/(n_N2/(8.3e-13*(T_g/300)**2) + 1.0/(5.5e-30))
+OH + C2H4 => C2H4OH 		    !	1.0/(n_N2/(7.5e-12*(T_g/300)**(-0.85)) + 1.0/(1.0e-28*(T_g/300)**(-4.5)))
+OH + N => NO + H 		    !	4.5e-11
+OH + N(2D) => NO + H 		    !	4.5e-11
+OH + CO => CO2 + H 		    !	1.3e-13
+
+H2O + CH => H2CO + H 		    !	2.8e-11*((T_g/300)**(-1.22))*exp(-12/T_g)
+H2O + C2H => OH + C2H2 	    !	7.9e-14*((T_g/300)**3.05)*exp(-376/T_g)
+
+
+H2O + N(2D) => OH + NH 	    !	4.5e-11
+H2O + N(2D) => HNO + H 	    !	5.0e-12
+CO + H => HCO 			    !	n_N2/(n_N2/(1.0e-10*exp(-1000/T_g)) + 1.0/ (7.5e-35*(T_g/300)**0.2 ))
+HCO + H => CO + H2 		    !	1.5e-10
+HCO + CH3 => CO + CH4 		    !	9.3e-11
+HCO + CH3 => CH3CHO 		    !	n_N2/(n_N2/(3.01e-11) + 1.0/(7.0e-26*(T_g/300)**(-3.5) ))
+HCO + N => CO + NH 		    !	1.0e-10
+H2CO + H => HCO + H2 		    !	3.3e-11*exp(-1850/T_g)
+H2CO + C => CO + (3)CH2 	    !	4.0e-10
+H2CO + CH => CO + CH3 		    !	5.0e-11*exp(-260/T_g)
+H2CO + CH => CH2CO + H 	    !	1.0e-10*exp(-260/T_g)
+H2CO + N(2D) => HNCO + H 	    !	4.0e-11
+H2CO + CN => HCO + HCN 	    !	6.7e-11*exp(-412/T_g)
+CH3O + H => H2CO + H2 		    !	3.0e-11
+CH3O + H => OH + CH3 		    !	3.0e-12
+CH3O + CH3 => H2CO + CH4 	    !	4.0e-11
+CH3O + N => NO + CH3 		    !	6.0e-11
+CH3OH + H => CH3O + H2 	    !	2.16e-11*exp(-2650/T_g)
+CH3OH + CH => H2CO + CH3 	    !	1.3e-10
+CH3OH + CH => OH + C2H4 	    !	1.3e-10
+CH3OH + C2H => CH3O + C2H2 	    !	5.0e-12
+CH3OH + N(2D) => OH + CH2NH 	    !	1.0e-11
+CH3OH + N(2D) => HNO + CH3 	    !	1.0e-11
+CH3OH + CN => CH3O + HCN 	    !	1.2e-10
+CH3CO + H => HCO + CH3 	    !	4.0e-11
+CH3CO + H => CH2CO + H2 	    !	2.0e-11
+HCCO + H => (3)CH2 + CO 	    !	1.7e-10
+HCCO + CH3 => C2H4 + CO 	    !	1.0e-10
+HCCO + N => HCN + CO 	   	    !	1.0e-10
+CH3CHO + H => CH3CO + H2 	    !	2.23e-11*exp(-1660/T_g)
+CH3CHO + C => C2H2 + H2 + CO 	    !	3.0e-10
+CH3CHO + CH => C2H2 + H2 + CO + H  !	2.0e-10
+CH3CHO + N(2D) => HNCO + CH3 	    !	4.0e-11
+C2H2OH + H => HCO + CH3 	    !	6.0e-11
+C2H2OH + H => CH3CO + H 	    !	1.0e-11
+C2H2OH + H => CO + CH4 	    !	1.0e-11
+C2H4OH + H => H2O + C2H4 	    !	2.0e-11
+C2H4OH + H => CH3O + CH3 	    !	5.0e-11
+C2H4OH + H => OH + C2H5 	    !	1.0e-11
+CO2 + CH => CO + CO + H 	    !	5.71e-12*exp(-345/T_g)
+CO2 + N(2D) => CO + NO 	    !	1.0e-11*exp(-1000/T_g)
+NO + H => HNO  		    !	n_N2/(n_N2/(2.44e-10*(T_g/300)**(-0.41)) + 1.0/(1.34e-31*((T_g/300)**(-1.32))*exp(-370/T_g)))
+NO + C => CN + O 		    !	7.0e-11*(T_g/300)**(-0.16)
+
+
+NO + C => CO + N 		    !	8.0e-11*(T_g/300)**(-0.16)
+NO + CH => HCN + O 	   	    !	1.0e-10*(T_g/300)**(-0.13)
+NO + CH => NCO + H 		    !	3.0e-11*(T_g/300)**(-0.13)
+NO + CH => CO + NH 		    !	3.0e-11*(T_g/300)**(-0.13)
+NO + CH => OH + CN 		    !	1.0e-11*(T_g/300)**(-0.13)
+NO + (3)CH2 => HNCO + H 	    !	2.1e-12*exp(554/T_g)
+NO + (3)CH2 => CO + NH2 	    !	3.0e-13*exp(554/T_g)
+NO + CH3 => CH3NO 		    !	n_N2/(n_N2/(1.1e-11*(T_g/300)**0.6) + 1.0/(1.1e-29*(T_g/300)**(-3.5)))
+NO + N => O + N2 		    !	4.0e-11
+NO + N(2D) => O + N2		    !	6.0e-11
+NO + NH => N2O + H 		    !	2.9e-11*((T_g/300)**(-0.3))*exp(77/T_g)
+NO + NH => OH + N2 		    !	1.2e-11*((T_g/300)**(-0.3))*exp(77/T_g)
+HNO + H => NO + H2 		    !	3.1e-11*exp(-500/T_g)
+HNO + C => NO + CH 		    !	3.8e-11
+HNO + C => NCO + H 		    !	3.0e-11
+HNO + C => HNC + O 		    !	3.0e-11
+HNO + C => CO + NH 		    !	3.0e-11
+HNO + CH => NO + (3)CH2 	    !	3.8e-11
+HNO + CH => HNCO + H 		    !	1.0e-10
+HNO + N(2D) => NO + NH 	    !	5.0e-11
+NCO + H => CO + NH 		    !	3.0e-11
+NCO + N => CO + N2 		    !	5.5e-11
+HNCO + C => HCN + CO 		    !	1.0e-10
+HNCO + C => HNC + CO 		    !	1.0e-10
+HNCO + CH => CO + H2CN 	    !	1.0e-10
+HNCO + CH => CO + HCN + H 	    !	1.0e-10
+HNCO + N(2D) => CO + N2 + H 	    !	5.0e-11
+HNCO + CN => NCO + HCN 	    !	3.0e-11
+CH3NO + H => HNO + CH3 	    !	1.39e-11*((T_g/300)**0.84)*exp(120/T_g)
+N2O + C => CO + N2 		    !	1.5e-11*exp(-300/T_g)
+N2O + C => NO + CN 		    !	1.5e-11*exp(-300/T_g)
+N2O + CH => CO + N2 + H 	    !	1.5e-11*exp(257/T_g)
+N2O + CH => NO + HCN 		    !	1.5e-11*exp(257/T_g)
+N2O + N(2D) => N2 + NO 	    !	1.5e-11*exp(-570/T_g)
+
+
+N2(A) + N2(A) => N2 + N2(B)     !   7.7e-11
+N2(A) + N2(A) => N2 + N2(C)     !   1.5e-10
+N2(A) + N2(A) => N2 + N + N     !   3.0e-11
+N2(A) + N2 => N2 + N2		 !   3.0e-16
+N2(A) + N => N2 + N		 !   4.2e-11
+N2(B) + N2 => N2 + N2(A)	 !   2.85e-11
+N2(B) + N2 => N2 + N2		 !   1.5e-12
+N2(B) => N2(A) + hv		 !   2.4e5
+N + N + N2 => N2(B) + N2	 !   4.4e-33
+N2(C) => N2(B) + hv		 !   2.74e7
+N2(A) + CH4 => N2 + CH3 + H        !   1.5e-12
+N2(A) + CH4 => N2 + (3)CH2 + H2    !   1.35e-13
+N2(A) + CH3 => N2 + (3)CH2 + H     !   1.0e-13
+N2(A) + H2 => N2 + H + H           !   2.4e-15
+N2(A) + HCN => N2 + CN + H         !   6.0e-12
+N2(A) + C2H4 => N2 + C2H2 + H2	    !   1.1e-10
+
+N2(A) + C2N2 => N2 + CN + CN       !   4.0e-11
+
+
+O + O + O2 => O3 + O            ! 2.1e-34*exp(345.0e0/T_g)
+O- + O2(a) => O3 + e            ! 0.75e0*1.9e-10
+O2(a) + O2 => O2 + O2           ! 2.2e-18*(T_g/300.0e0)**0.8
+O2(a) + O => O2 + O             ! 7.0e-17
+O2(b) + O => O2 + O             ! 4.0e-14
+O2(b) + O => O2(a) + O          ! 4.0e-14
+O + O2 + O2 => O3 + O2          ! 6.4e-35*exp(663.0/T_g)
+O2(a) + O3 => O2 + O2 + O       ! 5.2e-11*exp(-2840.0/T_g)
+O2(b) + O3 => O2 + O2 + O       ! 1.5e-11
+O + O3 => O2 + O2               ! 0.5e0*1.8e-11*exp(-2300.0e0/T_g)
+O + O3 => O2(a) + O2            ! 0.33e0*1.8e-11*exp(-2300.0e0/T_g)
+O + O3 => O2(b) + O2            ! 0.17e0*1.8e-11*exp(-2300.0e0/T_g)
+O2(a) + O2(a) => O2(b) + O2     ! 1.81e-18*exp(700.0e0/T_g)*(T_g/300.0e0)**3.8
+O + O + O2 => O2 + O2           ! 0.5e0*3.81e-30*exp(-170.0e0/T_g)/T_g
+O + O + O2 => O2(a) + O2        ! 0.33e0*3.81e-30*exp(-170.0e0/T_g)/T_g
+O + O + O2 => O2(b) + O2        ! 0.17e0*3.81e-30*exp(-170.0e0/T_g)/T_g
+O + O + O => O2 + O             ! 3.6e-32*(1.0e0/T_g)**0.63
+O + O2 + O3 => O3 + O3          ! 1.66e-34*exp(T_g/300.0e0)
+O(1D) + O => O + O               ! 8.0e-12
+O(1D) + O2 => O + O2             ! 7.0e-12*exp(67.0e0/T_g)
+O(1D) + O2 => O + O2(a)          ! 1.0e-12
+O(1D) + O2 => O + O2(b)          ! 2.56e-11*exp(67.0e0/T_g)
+O(1D) + O3 => O2 + O2            ! 1.2e-10
+O(1D) + O3 => O2 + O + O         ! 1.2e-10
+O => O + hv                      ! 3.22e7
+e + O2+ => O + O                 ! 2.0e-7*(300.0e0/T_e)
+e + O2+ => O + O(1D)             ! 1.95e-7*(300.0e0/T_e)**0.7
+O+ + O2 => O + O2+               ! 2.0e-11*(300.0e0/T_g)**0.5
+O+ + O2(a) => O + O2+            ! 2.0e-11*(300.0e0/T_g)**0.5
+O+ + O3 => O2+ + O2              ! 1.0e-10
+O+ + O- => O + O                 ! 2.8e-7
+O2+ + O- => O2 + O               ! 9.6e-8*(300.0e0/T_g)**0.5
+
+
+
+
+
+
+
+N2(A) + O2 => N2 + O + O	 !   1.63e-12*(T_g/300.0)**0.55
+N2(B) + O2 => N2 + O + O	 !   3.0e-10
+N2(C) + O2 => N2 + O + O	 !   3.0e-10
+N2(A) + O => NO + N(2D)	 !   7.0e-12
+N2(A) + O- => O + N2 + e	 !   2.2e-9
+N2(B) + O- => O + N2 + e	 !   1.9e-9
+N + O2 => NO + O	    	 !   1.1e-14*T_g*exp(-3150.0/T_g)
+N(2D) + O2 => NO + O		 !   7.0e-12
+N + O2(a) => NO + O		 !   2.0e-14*exp(-600.0/T_g)
+O2(a) + NO => O2 + NO	         !   2.5e-17
+N + O + N2 => NO + N2	         !   1.76e-31*T_g**(-0.5)
+N + O + O2 => NO + O2	         !   1.76e-31*T_g**(-0.5)
+NO + N => N2 + O		 !   1.05e-12*T_g**0.5
+NO + N(2D) => N2 + O		 !   6.3e-11
+N2(A) + NO => NO(A) + N2	 !   6.6e-11
+NO(A) => NO + hv		 !   5.0e6
+NO(A) + N2 => NO + N2	         !   1.0e-13
+NO(A) + O2 => NO + O2	         !   1.5e-10
+NO(A) + NO => NO + NO	         !   2.0e-10
+N + O + N2 => NO(B) + N2	 !   (1.0/35.0)*1.76e-31*T_g**(-0.5)
+N + O + O2 => NO(B) + O2	 !   (1.0/35.0)*1.76e-31*T_g**(-0.5)
+NO(B) => NO + hv		 !   1.0e5
+NO(B) + N2 => NO + N2	         !   6.1e-13
+NO(B) + O2 => NO + O2	         !   1.5e-11
+NO(B) + NO => NO + NO	         !   2.0e-10
+O + NO + N2 => NO2 + N2	 !   1.0e-31
+O + NO + O2 => NO2 + O2	 !   8.6e-32
+NO + O3 => NO2 + O2		 !   4.3e-12*exp(-1560.0/T_g)
+NO2 + O => NO + O2		 !   9.7e-12
+NO2 + N => N2 + O2		 !   7.0e-13
+NO2 + N => N2 + O + O	         !   9.1e-13
+NO2 + N => NO + NO	   	 !   2.3e-12
+NO + O + N2 => NO2(A) + N2      !   3.7e-32
+NO + O + O2 => NO2(A) + O2	 !   3.7e-32
+NO2(A) => NO2 + hv		 !   2.5e4
+NO2(A) + N2 => NO2 + N2 	 !   6.0e-11
+NO2(A) + O2 => NO2 + O2 	 !   6.0e-11
+e + NO+ => N + O		 !   4.2e-7*(300.0/T_e)**0.85
+O2+ + NO => NO+ + O2		 !   4.4e-10
+O2+ + N => NO+ + O		 !   1.2e-10
+O+ + NO => NO+ + O		 !   2.4e-11
+O+ + N2 + O2 => NO+ + N + O2    !   6.0e-29*(300.0/T_g)**2
+O+ + N2 + N2 => NO+ + N + N2    !   6.0e-29*(300.0/T_g)**2
+N2+ + O2 => O2+ + N2   	 !   6.0e-11*(300.0/T_g)**0.5
+N2+ + O => O+ + N2		 !   1.0e-11*(300.0/T_g)**0.2
+N2+ + O => NO+ + N 		 !   1.3e-10*(300.0/T_g)**0.5
+N2+ + NO => NO+ + N2		 !   3.3e-10
+N4+ + O2 => O2+ + N2 + N2       !   2.5e-10
+N4+ + O => O+ + N2 + N2	 !   2.5e-10
+N4+ + NO => NO+ + N2 + N2       !   4.0e-10
+
+
+
+CO2 + N2 => CO + O + N2	 	 !   3.91e-10*exp(-49430/T_g)
+CO2 + O => CO + O2		 !   2.8e-11*exp(-26500/T_g)
+CO2 + C => CO + CO		 !   1.0e-15
+O + CO + N2 => CO2 + N2		 !   8.2e-34*exp(-1510/T_g)
+O2 + CO => CO2 + O		 !   4.2e-12*exp(-24000/T_g)
+O3 + CO => CO2 + O2		 !   4.0e-25
+C + CO + N2 => C2O + N2		 !   6.5e-32
+O2 + C => CO + O		 !   3.0e-11
+O + C + N2 => CO + N2		 !   2.14e-29*((T_g/300)**(-3.08))*exp(-2114/T_g)
+O + C2O => CO + CO		 !   5.0e-11
+O2 + C2O => CO2 + CO		 !   3.3e-13
+O + O3 => O2 + O2		 !   3.1e-14*(T_g**0.75)*exp(-1575/T_g)
+O3 + N2 => O2 + O + N2		 !   4.12e-10*exp(-11430/T_g)
+
+O + O + N2 => O2 + N2		 !   1.27e-32*((T_g/300)**(-1))*exp(-170/T_g)
+
+
+
+
+O + O + Ar => O2 + Ar		 !   5.21e-35*exp(900/T_g)
+
+
+O + O + H2 => O2 + H2		 !   1.3e-34*exp(900/T_g)
+O + O + O3 =>  O2 + O3		 !   1.3e-34*exp(900/T_g)
+O + O + H2O => O2 + H2O	 !   2.6e-34*exp(900/T_g)
+
+O + O + N2 => O2(a) + N2		 !   6.93e-35
+O + O + N2 => O2(b) + N2		 !   6.93e-35
+O + O(1D) + N2 => O2 + N2	 !   9.9e-33
+O + O2 + Ar => O3 + Ar		 !   6.4e-35*exp(663/T_g)
+
+O + O2 + N2 => O3 + N2		 !   6.4e-35*exp(663/T_g)
+O + O2 + H2 => O3 + H2		 !   1.3e-34*exp(663/T_g)
+
+O + O2 + H2O => O3 + H2O	 !   3.2e-34*exp(663/T_g)
+
+
+
+
+O(1D) + O3 => O2(a) + O2	 !   2.65e-10
+O(1D) + O3 => O2(b) + O2	 !   7.2e-12
+O(1D) + N2 => N2 + O		 !   5.0e-12
+O2 + O2(a) => O3 + O		 !   3.0e-21
+O2(vib) + N2 => O2 + N2	 !   1.0e-13
+O2(vib) + O2 => O2 + O2	 !   1.0e-13
+O2(vib) + O3 => O2 + O3	 !   1.0e-13
+O2(vib) + Ar => O2 + Ar	 !   1.0e-13
+O2(vib) + H2 => O2 + H2	 !   1.0e-13
+O2(vib) + H2O => O2 + H2O	 !   1.0e-13
+O2(rot) + N2 => O2 + N2	 !   1.0e-13
+O2(rot) + O2 => O2 + O2	 !   1.0e-13
+O2(rot) + O3 => O2 + O3	 !   1.0e-13
+O2(rot) + Ar => O2 + Ar	 !   1.0e-13
+O2(rot) + H2 => O2 + H2	 !   1.0e-13
+O2(rot) + H2O => O2 + H2O	 !   1.0e-13
+O2(a) + O2(a) => O2 + O2	 !   9.0e-17*exp(-560/T_g)
+O2(a) + O2(a) => O2(b) + O2	 !   1.8e-19*exp(700/T_g)
+
+
+O2(a) + Ar => O2 + Ar		 !   3.0e-18*exp(-200/T_g)
+O2(a) + N2 => O2 + N2 		 !   3.0e-18*exp(-200/T_g)
+O2(a) + H2 => O2 + H2		 !   6.0e-18*exp(-200/T_g)
+O2(a) + H2O => O2 + H2O	 !   1.5e-17*exp(-200/T_g)
+O2(a) + O3 => O2 + O3	 	 !   6.0e-18*exp(-200/T_g)
+O2(b) + O2(b) => O2(a) + O2	 !   3.6e-17
+O2(b) + O3 => O2(a) + O2 + O	 !   1.0e-14
+O2(b) + O2 => O2 + O2		 !   3.79e-16*exp(-241/T_g)
+
+O2(b) + H => O2 + H		 !   8.0e-15
+O2(b) + N2 => O2 + N2		 !   4.9e-15*exp(-253/T_g)
+O2(b) + H2O => O2 + H2O	 !   2.3e-12
+O2(b) + H2 => O2 + H2		 !   4.9e-15*exp(-253/T_g)
+O2(b) + O3 => O2 + O3		 !   2.2e-11
+O2(b) + Ar => O2 + Ar		 !   1.0e-16
+O2(b) + O2 => O2(a) + O2	 !   3.73e-16*exp(-241/T_g)
+
+O2(b) + H => O2(a) + H		 !   7.2e-14
+O2(b) + N2 => O2(a) + N2	 !   4.9e-15*exp(-253/T_g)
+O2(b) + H2O => O2(a) + H2O	 !   2.3e-12
+O2(b) + H2 => O2(a) + H2	 !   4.9e-15*exp(-253/T_g)
+O2(b) + O3 => O2(a) + O3	 !   2.2e-11
+O2(b) + NO => O2(a) + NO	 !   4.0e-14
+O2(b) + Ar => O2(a) + Ar	 !   6.0e-16
+O3 + O3 => O2 + O2 + O2	 !   7.47e-12*exp(-9310/T_g)
+O3 + Ar => O + O2 + Ar		 !   7.3e-10*exp(-11400/T_g)
+O3 + N2 => O + O2 + N2	 	 !   7.3e-10*exp(-11400/T_g)
+O3 + O2 => O + O2 + O2	 	 !   7.3e-10*exp(-11400/T_g)
+O3 + O3 => O + O2 + O3	 	 !   1.4e-9*exp(-11400/T_g)
+O3 + H2 => O + O2 + H2		 !   1.4e-9*exp(-11400/T_g)
+O3 + H2O => O + O2 + H2O	 !   4.0e-9
+
+
+
+N + N + Ar => N2 + Ar		 !   1.38e-34*exp(500/T_g)
+
+N + N + O2 => N2 + O2		 !   1.38e-34*exp(500/T_g)
+N + N + H2O => N2 + H2O	 !   6.5e-34*exp(500/T_g)
+N + N + H2 => N2 + H2		 !   2.5e-34*exp(500/T_g)
+N + N + O3 => N2 + O3		 !   2.5e-34*exp(500/T_g)
+N(2D) + N2 => N + N2		 !   2.4e-14
+N2(rot) + N2 => N2 + N2	 !   1.0e-13
+N2(rot) + N => N2 + N	 	 !   1.0e-13
+N2(rot) + O2 => N2 + O2	 !   1.0e-13
+N2(rot) + O3 => N2 + O3	 !   1.0e-13
+N2(rot) + O => N2 + O	  	 !   1.0e-13
+N2(rot) + H2O => N2 + H2O	 !   1.0e-13
+N2(rot) + H2 => N2 + H2	 !   1.0e-13
+N2(rot) + Ar => N2 + Ar	 !   1.0e-13
+N2(vib) + N2 => N2 + N2	 !   1.0e-13
+N2(vib) + N => N2 + N	 	 !   1.0e-13
+N2(vib) + O2 => N2 + O2	 !   1.0e-13
+N2(vib) + O3 => N2 + O3	 !   1.0e-13
+N2(vib) + O => N2 + O	  	 !   1.0e-13
+N2(vib) + H2O => N2 + H2O	 !   1.0e-13
+N2(vib) + H2 => N2 + H2	 !   1.0e-13
+N2(vib) + Ar => N2 + Ar	 !   1.0e-13
+N2(A) + Ar => N2 + Ar		 !   4.0e-17
+N2(A) + N2 => N2 + N2		 !   3.7e-16
+N2(A) + O2 => N2 + O2		 !   8.1e-13
+N2(A) + O2(a) => N2 + O2(a)	 !   8.1e-13
+N2(A) + O => N2 + O		 !   2.7e-11
+N2(A) + NO => N2 + NO		 !   1.5e-10
+N2(A) + H => N2 + H		 !   2.1e-10
+N2(A) + N2O => N2 + N2O	 !   1.7e-10
+N2(A) + H2 => N2 + H2		 !   2.1e-10
+N2(A) + H2O => N2 + H2O	 !   2.1e-10
+N2(A) + N => N2 + N		 !   2.0e-11
+N2(A) + N2(A) => N2 + N2(A)	 !   2.0e-12
+N2(a') + Ar => N2 + Ar		 !   4.0e-17
+N2(a') + N2 => N2 + N2		 !   3.7e-16
+N2(a') + O2 => N2 + O2		 !   8.1e-13
+N2(a') + O2(a) => N2 + O2(a)	 !   8.1e-13
+N2(a') + O => N2 + O		 !   2.7e-11
+N2(a') + NO => N2 + NO		 !   1.5e-10
+N2(a') + H => N2 + H		 !   2.1e-10
+N2(a') + N2O => N2 + N2O	 !   1.7e-10
+N2(a') + H2 => N2 + H2		 !   2.1e-10
+N2(a') + H2O => N2 + H2O	 !   2.1e-10
+N2(a') + N => N2 + N		 !   2.0e-11
+N2(a') + N2(a') => N2 + N2(a')	 !   2.0e-12
+
+
+O + N + Ar => NO + Ar		 !   1.02e-32
+
+
+O + N + H2 => NO + H2		 !   2.02e-32
+O + N + H2O => NO + H2O	 !   5.02e-32
+O + N + O3 => NO + O3		 !   2.02e-32
+O + N(2D) => N + O(1D)		 !   2.8e-13
+O + N2(A) => NO + N		 !   7.0e-12
+
+O + N2(a') => NO + N		 !   7.0e-12
+O + N2(a') => NO + N(2D)	 !   1.0e-12
+O + NO => N + O2		 !   9.0e-13*exp(-19500/T_g)
+O + NO + Ar => NO2 + Ar	 !   1.0e-31
+
+
+O + NO + H2 => NO2 + H2	 !   2.0e-31
+O + NO + H2O => NO2 + H2O	 !   5.0e-31
+O + NO + O3 => NO2 + O3	 !   2.0e-31
+
+O + NO2 + Ar => NO3 + Ar	 !   9.0e-32
+O + NO2 + N2 => NO3 + N2	 !   9.0e-32
+O + NO2 + O2 => NO3 + O2	 !   9.0e-32
+O + NO2 + H2 => NO3 + H2	 !   2.0e-31
+O + NO2 + H2O => NO3 + H2O	 !   5.0e-31
+O + NO2 + O3 => NO3 + O3	 !   2.0e-31
+O + N2O => N2 + O2		 !   1.66e-10*exp(-14100/T_g)
+O + N2O => NO + NO		 !   1.15e-10*exp(-13400/T_g)
+O + NO3 => NO2 + O2		 !   1.7e-11
+O + N2O5 => N2 + O2 + O2 + O2	 !   3.0e-16
+O(1D) + N2 + Ar => N2O + Ar	 !   2.8e-36
+O(1D) + N2 + N2 => N2O + N2	 !   2.8e-36
+O(1D) + N2 + O2 => N2O + O2	 !   2.8e-36
+O(1D) + N2 + H2 => N2O + H2	 !   5.0e-36
+O(1D) + N2 + H2O => N2O + H2O	 !   1.0e-35
+O(1D) + N2 + O3 => N2O + O3	 !   5.0e-36
+O(1D) + NO => O2 + N		 !   1.7e-10
+O(1D) + NO2 => O2 + NO		 !   3.0e-10
+O(1D) + N2O => NO + NO		 !   8.22e-11
+O(1D) + N2O => O2 + N2		 !   4.93e-11
+O(1D) + N2O => O + N2O		 !   5.48e-12
+
+
+O2 + N(2D) => NO + O(1D)	 !   6.0e-12
+O2 + N2 => N2O + O		 !   1.0e-10*exp(-55200/T_g)
+
+O2 + N2(A) => N2 + O2(a)	 !   1.29e-12
+O2 + N2(A) => N2 + O2(b)	 !   1.29e-12
+O2 + N2(A) => N2O + O		 !   7.8e-14
+O2 + N2(A) => N2O + O(1D)	 !   3.0e-14
+O2 + N2(a') => N2 + O + O	 !   2.8e-11
+O2 + NO => NO2 + O		 !   2.8e-12*exp(-23400/T_g)
+O2 + NO + NO => NO2 + NO2	 !   1.4e-38
+O2 + NO3 => NO2 + O3		 !   1.0e-17
+O2(a) + N => O + NO		 !   2.0e-14*exp(-600/T_g)
+O2(a) + N2(A) => N2 + O + O	 !   2.0e-11
+O2(a) + NO => O + NO2		 !   4.88e-18
+O2(b) + N => O + NO		 !   2.0e-14*exp(-600/T_g)
+O2(b) + N2(A) => N2 + O + O	 !   2.0e-11
+O2(b) + NO => O + NO2		 !   4.88e-18
+O3 + N => NO + O2		 !   5.0e-16
+O3 + N(2D) => NO + O2		 !   1.0e-10
+O3 + N2(A) => N2 + O2 + O	 !   3.36e-11
+O3 + N2(A) => NO + NO + O	 !   8.4e-12
+O3 + N2(a') => N2 + O2 + O	 !   3.36e-11
+O3 + N2(a') => NO + NO + O	 !   8.4e-12
+
+O3 + NO2 => NO3 + O2		 !   1.4e-13*exp(-2470/T_g)
+O3 + NO2 => NO + O2 + O2	 !   1.0e-18
+O3 + NO3 => NO2 + O2 + O2	 !   1.0e-17
+
+
+N + NO2 => NO + NO		 !   1.33e-12*exp(220/T_g)
+N + NO2 => N2O + O		 !   1.66e-12*exp(220/T_g)
+N + NO3 => NO2 + NO		 !   3.0e-12
+N(2D) + NO => N2O		 !   6.0e-11
+N(2D) + NO => N2 + O		 !   4.5e-11
+N(2D) + NO => N2 + O(1D)	 !   4.5e-11
+N(2D) + N2O => NO + N2		 !   1.5e-11*exp(-570/T_g)
+N(2D) + NO2 => N2O + O		 !   1.5e-12*exp(-570/T_g)
+N(2D) + NO2 => NO + NO		 !   1.5e-12*exp(-570/T_g)
+N2(A) + NO2 => N2 + NO + O	 !   1.3e-11
+N2(A) + N2O => N2 + N2 + O	 !   9.3e-12*exp(120/T_g)
+N2(A) + N2O => N2 + N + NO	 !   1.0e-11
+N2(a') + NO => N2 + N + O	 !   3.6e-10
+NO + NO => N2O + O		 !   7.22e-12*exp(-33155/T_g)
+NO + NO => N2 + O2		 !   2.51e-11*exp(-30653/T_g)
+NO + NO + O2 => NO2 + NO2	 !   3.3e-39*exp(530/T_g)
+NO + NO2 => N2O3		 !   7.9e-12
+NO + NO2 + Ar => N2O3 + Ar	 !   3.1e-34
+NO + NO2 + N2 => N2O3 + N2	 !   3.1e-34
+NO + NO2 + O2 => N2O3 + O2	 !   3.1e-34
+NO + NO2 + H2 => N2O3 + H2	 !   6.1e-34
+NO + NO2 + H2O => N2O3 + H2O	 !   9.1e-34
+NO + NO2 + O3 => N2O3 + O3	 !   6.1e-34
+NO + N2O => NO2 + N2		 !   2.92e-13*exp(-23292/T_g)
+NO + NO3 => NO2 + NO2		 !   1.8e-11*exp(110/T_g)
+NO + NO3 => NO + NO + O2	 !   7.3e-12*exp(-947/T_g)
+NO2 + NO2 => NO + NO + O2	 !   7.49e-12*exp(-13898.1/T_g)
+NO2 + NO2 => NO3 + NO		 !   1.03e-12*exp(-10524.1/T_g)
+NO2 + NO2 + Ar => N2O4 + Ar	 !   1.4e-33
+NO2 + NO2 + N2 => N2O4 + N2	 !   1.4e-33
+NO2 + NO2 + O2 => N2O4 + O2	 !   1.4e-33
+NO2 + NO2 + H2 => N2O4 + H2	 !   3.0e-33
+NO2 + NO2 + H2O => N2O4 + H2O	 !   8.0e-33
+NO2 + NO2 + O3 => N2O4 + O3	 !   3.0e-33
+NO2 + NO3 => NO + NO2 + O2	 !   4.5e-14*exp(-1260/T_g)
+NO2 + NO3 + Ar => N2O5 + Ar	 !   2.8e-30
+NO2 + NO3 + O2 => N2O5 + O2	 !   2.8e-30
+NO2 + NO3 + N2 => N2O5 + N2	 !   2.8e-30
+NO2 + NO3 + H2 => N2O5 + H2	 !   6.0e-30
+NO2 + NO3 + H2O => N2O5 + H2O	 !   1.5e-30
+NO2 + NO3 + O3 => N2O5 + O3	 !   6.0e-30
+N2O(vib) + N2 => N2O + N2	 !   1.0e-13
+N2O(vib) + N => N2O + N	 !   1.0e-13
+N2O(vib) + O2 => N2O + O2	 !   1.0e-13
+N2O(vib) + O3 => N2O + O3	 !   1.0e-13
+N2O(vib) + O => N2O + O	 !   1.0e-13
+N2O(vib) + H2O => N2O + H2O	 !   1.0e-13
+N2O(vib) + H2 => N2O + H2	 !   1.0e-13
+N2O(vib) + Ar => N2O + Ar	 !   1.0e-13
+NO3 + NO3 => NO2 + NO2 + O2	 !   5.0e-12*exp(-3000/T_g)
+N2O3 + N2 => NO + NO2 + N2	 !   1.91e-7*exp(-4882/T_g)
+N2O4 + N2 => NO2 + NO2 + N2	 !   1.3e-5*exp(-6403/T_g)
+N2O5 + N2 => NO2 + NO3 + N2	 !   1.33e-3*exp(-11000/T_g)
+
+
+H + O + Ar => OH + Ar		 !   1.5e-32
+H + O + N2 => OH + N2		 !   1.5e-32
+H + O + O2 => OH + O2		 !   1.5e-32
+H + O + H2 => OH + H2		 !   3.0e-32
+H + O + O3 => OH + O3		 !   3.0e-32
+H + O + H2O => OH + H2O	 !   7.5e-32
+H + O2 => OH + O		 !   1.62e-10*exp(-7470/T_g)
+H + O2 => O + H + O		 !   6.0e-9*exp(-52300/T_g)
+H + O2 + Ar => HO2 + Ar	 !   6.09e-32
+H + O2 + N2 => HO2 + N2	 !   6.09e-32
+H + O2 + O2 => HO2 + O2	 !   6.09e-32
+H + O2 + H2O => HO2 + H2O	 !   3.05e-31
+H + O2 + H2 => HO2 + H2	 !   1.53e-31
+H + O2 + O3 => HO2 + O3	 !   1.53e-31
+H + O2(a) => OH + O		 !   1.83e-13*exp(-1550/T_g)
+H + O3 => OH + O2		 !   2.71e-11
+H + O3 => HO2 + O		 !   7.51e-13
+H + N + Ar => NH + Ar		 !   5.0e-32
+H + N + N2 => NH + N2		 !   5.0e-32
+H + N + O2 => NH + O2		 !   5.0e-32
+H + N + H2 => NH + H2		 !   1.0e-31
+H + N + H2O => NH + H2O	 !   2.0e-31
+H + N + O3 => NH + O3		 !   1.0e-31
+H + NO + Ar => HNO + Ar	 !   1.22e-31*exp(-212/T_g)
+H + NO + O2 => HNO + O2	 !   1.22e-31*exp(-212/T_g)
+H + NO + N2 => HNO + N2	 !   1.22e-31*exp(-212/T_g)
+H + NO + H2 => HNO + H2	 !   3.05e-31*exp(-212/T_g)
+H + NO + H2O => HNO + H2O	 !   6.1e-31*exp(-212/T_g)
+H + NO + O3 => HNO + O3	 !   3.05e-31*exp(-212/T_g)
+H + NO => OH + N		 !   3.6e-10*exp(-24910/T_g)
+H + NO => NH + O		 !   9.29e-10*exp(-35220/T_g)
+H + NO2 => OH + NO		 !   4.0e-10*exp(-340/T_g)
+H + NO2 + Ar => HNO2 + Ar	 !   7.43e-34*exp(-453/T_g)
+H + NO2 + N2 => HNO2 + N2	 !   7.43e-34*exp(-453/T_g)
+H + NO2 + O2 => HNO2 + O2	 !   7.43e-34*exp(-453/T_g)
+H + NO2 + H2 => HNO2 + H2	 !   1.53e-33*exp(-453/T_g)
+H + NO2 + H2O => HNO2 + H2O	 !   3.43e-33*exp(-453/T_g)
+H + NO2 + O3 => HNO2 + O3	 !   1.53e-33*exp(-453/T_g)
+H + N2O => NO + NH		 !   4.96e-7*exp(-18700/T_g)
+H + N2O => OH + N2		 !   5.13e-14*exp(-3603/T_g)
+H + NO3 => OH + NO2             !   5.8e-10*exp(-750/T_g)
+H + H + Ar => H2 + Ar		 !   2.0e-32
+H + H + O2 => H2 + O2		 !   2.0e-32
+H + H + N2 => H2 + N2		 !   2.0e-32
+H + H + H2 => H2 + H2		 !   4.0e-32
+H + H + H2O => H2 + H2O	 !   9.2e-32
+H + H + O3 => H2 + O3		 !   4.0e-32
+H + H2 => H + H + H		 !   4.67e-7*exp(-55000/T_g)
+H + OH => H + H + O		 !   6.0e-9*exp(-50900/T_g)
+H + OH => H2 + O		 !   7.0e-14*exp(-1950/T_g)
+H + OH + Ar => H2O + Ar	 !   8.0e-31
+H + OH + O2 => H2O + O2	 !   8.0e-31
+H + OH + N2 => H2O + N2	 !   8.0e-31
+H + OH + H2 => H2O + H2	 !   1.8e-30
+H + OH + H2O => H2O + H2O	 !   3.99e-30
+H + OH + O3 => H2O + O3	 !   1.8e-30
+H + HO2 => H2 + O2		 !   2.06e-11*exp(-277/T_g)
+H + HO2 => OH + OH		 !   1.66e-10*exp(-413/T_g)
+H + HO2 => H2O + O		 !   5.0e-11*exp(-866/T_g)
+H + HO2 => H2O + O(1D)		 !   2.32e-12*exp(80.85/T_g)
+H + H2O => OH + H + H		 !   5.8e-9*exp(-52900/T_g)
+H + H2O => OH + H2		 !   6.89e-12*exp(-9720/T_g)
+H + H2O2 => HO2 + H2		 !   8.0e-11*exp(-4000/T_g)
+H + H2O2 => H2O + OH		 !   4.0e-11*exp(-2000/T_g)
+H + NH => H2 + N		                !   1.7e-11
+H + HNO => H2 + NO		 !   3.0e-11*exp(-500/T_g)
+H + HNO => OH + NH		 !   2.4e-9*exp(-9010/T_g)
+H + HNO2 => H2 + NO2		 !   2.0e-11*exp(-3700/T_g)
+H + HNO2 => HNO + OH		 !   1.26e-11*exp(-2501/T_g)
+H + HNO2 => H2O + NO		 !   6.5e-13*exp(-1932/T_g)
+H + HNO3 => HNO2 + OH		 !   3.16e-13*exp(-3512.8/T_g)
+H + HNO3 => H2O + NO2		 !   1.51e-14*exp(-3164.8/T_g)
+H + HNO3 => H2 + NO3		 !   4.8e-12*exp(-8258.3/T_g)
+H + HNO4 => HO2 + HNO2		 !   2.46e-14
+H2 + O => OH + H                !   1.6e-11*exp(-4570/T_g)
+H2 + O(1D) => OH + H		 !   1.1e-10
+H2 + O2 => H + HO2		 !   2.4e-10*exp(-28500/T_g)
+H2 + O2 => O + O + H2		 !   6.0e-9*exp(-52300/T_g)
+H2 + O2 => OH + OH		 !   3.16e-10*exp(-21890/T_g)
+H2 + N => NH + H             	 !   1.69e-9*exp(-18095/T_g)
+H2 + N(2D) => NH + H		 !   4.6e-11*exp(-880/T_g)
+H2 + N2(A) => N2 + H + H	 !   3.8e-10*exp(-3500/T_g)
+H2 + N2(a') => N2 + H + H	 !   2.6e-11
+H2 + NO2 => HNO2 + H		 !   1.48e-13*exp(-14991/T_g)
+H2 + OH => H2O + H		 !   9.54e-13*exp(-1490/T_g)
+H2 + OH => H2 + O + H		 !   6.0e-9*exp(-50900/T_g)
+H2 + HO2 => H2O2 + H		 !   4.38e-12*exp(-10751/T_g)
+H2 + H2O => OH + H2 + H	 !   5.8e-9*exp(-52900/T_g)
+H2(vib) + N2 => H2 + N2	 !   1.0e-13
+H2(vib) + N => H2 + N		 !   1.0e-13
+H2(vib) + O2 => H2 + O2	 !   1.0e-13
+H2(vib) + O3 => H2 + O3	 !   1.0e-13
+H2(vib) + O => H2 + O		 !   1.0e-13
+H2(vib) + H2O => H2 + H2O	 !   1.0e-13
+H2(vib) + H2 => H2 + H2	 !   1.0e-13
+H2(vib) + Ar => H2 + Ar	 !   1.0e-13
+H2(rot) + N2 => H2 + N2	 !   1.0e-13
+H2(rot) + N => H2 + N		 !   1.0e-13
+H2(rot) + O2 => H2 + O2	 !   1.0e-13
+H2(rot) + O3 => H2 + O3	 !   1.0e-13
+H2(rot) + O => H2 + O		 !   1.0e-13
+H2(rot) + H2O => H2 + H2O	 !   1.0e-13
+H2(rot) + H2 => H2 + H2	 !   1.0e-13
+H2(rot) + Ar => H2 + Ar	 !   1.0e-13
+OH + O => H + O2		 !   1.81e-11*exp(177/T_g)
+OH + O(1D) => H + O2		 !   2.08e-11*exp(-154/T_g)
+OH + O3 => HO2 + O2		 !   1.69e-12*exp(-941/T_g)
+OH + N => H + NO		 !   4.7e-11
+OH + N => NH + O		 !   1.88e-11*exp(-10700/T_g)
+OH + N2(A) => OH(A) + N2	 !   1.0e-10
+OH + N2(A) => O + H + N2	 !   1.0e-11
+OH + N2(a') => OH(A) + N2	 !   1.0e-10
+OH + N2(a') => O + H + N2	 !   1.0e-11
+OH + NO => H + NO2		 !   5.2e-12*exp(-15100/T_g)
+OH + NO + Ar => HNO2 + Ar	 !   7.4e-31
+OH + NO + N2 => HNO2 + N2	 !   7.4e-31
+OH + NO + O2 => HNO2 + O2	 !   7.4e-31
+OH + NO + H2 => HNO2 + H2	 !   1.5e-30
+OH + NO + H2O => HNO2 + H2O	 !   3.5e-30
+OH + NO + O3 => HNO2 + O3	 !   1.5e-30
+OH + NO2 => HO2 + NO		 !   3.0e-11*exp(-3360/T_g)
+OH + NO2 + Ar => HNO3 + Ar	 !   4.6e-29*exp(-1180/T_g)
+OH + NO2 + O2 => HNO3 + O2	 !   4.6e-29*exp(-1180/T_g)
+OH + NO2 + N2 => HNO3 + N2	 !   4.6e-29*exp(-1180/T_g)
+OH + NO2 + H2 => HNO3 + H2	 !   9.2e-29*exp(-1180/T_g)
+OH + NO2 + H2O => HNO3 + H2O	 !   2.3e-28*exp(-1180/T_g)
+OH + NO2 + O3 => HNO3 + O3	 !   9.2e-29*exp(-1180/T_g)
+OH + N2O => HNO + NO	 	 !   3.8e-17
+OH + N2O => HO2 + N2	 	 !   3.69e-13*exp(-2740/T_g)
+OH + NO3 => HO2 + NO2	 	 !   2.0e-11
+OH + N2O5 => HNO3 + NO3	 !   2.85e-15
+OH + N2O5 => HO2 + NO2 + NO2 	 !   2.85e-15
+OH + OH => H2O + O	 	 !   5.49e-14*exp(970/T_g)
+OH + OH + Ar => H2O2 + Ar 	 !   8.0e-31
+OH + OH + N2 => H2O2 + N2 	 !   8.0e-31
+OH + OH + O2 => H2O2 + O2 	 !   8.0e-31
+OH + OH + H2 => H2O2 + H2 	 !   1.6e-30
+OH + OH + H2O => H2O2 + H2O 	 !   4.0e-30
+OH + OH + O3 => H2O2 + O3 	 !   1.6e-30
+OH + OH(A) => H2O + O		 !   1.5e-11
+OH + HO2 => H2O + O2 		 !   4.8e-11*exp(250/T_g)
+OH + H2O2 => H2O + HO2		 !   4.53e-12*exp(-288.9/T_g)
+OH + NH => N + H2O		 !   3.12e-12
+OH + NH => H2 + NO		 !   4.0e-11
+OH + NH => HNO + H		 !   4.0e-11
+OH + HNO => H2O + NO		 !   8.0e-11*exp(-500/T_g)
+OH + HNO2 => H2O + NO2		 !   2.7e-12*exp(260/T_g)
+OH + HNO3 => H2O + NO3		 !   1.5e-13
+OH + HNO4 => H2O2 + NO3	 !   1.9e-13*exp(270/T_g)
+OH + HNO4 => H2O + NO2 + O2	 !   1.71e-12*exp(270/T_g)
+OH(A) + H2O2 => HO2 + H2O	 !   1.47e-10
+OH(A) + Ar => OH + Ar		 !   1.44e-15
+OH(A) + O2 => OH + O2		 !   2.49e-13
+OH(A) + N2 => OH + N2		 !   2.49e-14
+OH(A) + H2O => OH + H2O	 !   7.61e-10
+OH(A) + H2 => OH + H2		 !   7.1e-11
+HO2 + O => OH + O2		 !   2.71e-11*exp(224/T_g)
+HO2 + O(1D) => OH + O2		 !   2.7e-11*exp(224/T_g)
+HO2 + O2(a) => OH + O2 + O	 !   1.66e-11
+HO2 + O2(b) => OH + O2 + O	 !   1.66e-11
+HO2 + O3 => OH + O2 + O2	 !   1.4e-14*exp(-600/T_g)
+HO2 + N => OH + NO		 !   2.2e-11
+HO2 + N => NH + O2		 !   1.7e-13
+HO2 + NO => HNO + O2		 !   9.1e-19*exp(2819/T_g)
+HO2 + NO + Ar => HNO3 + Ar	 !   5.6e-33
+HO2 + NO + N2 => HNO3 + N2	 !   5.6e-33
+HO2 + NO + O2 => HNO3 + O2	 !   5.6e-33
+HO2 + NO + H2 => HNO3 + H2	 !   1.2e-32
+HO2 + NO + H2O => HNO3 + H2O	 !   2.6e-32
+HO2 + NO + O3 => HNO3 + O3	 !   1.2e-32
+HO2 + NO2 => HNO2 + O2		 	!   1.2e-13
+HO2 + NO2 + Ar => HNO2 + O2 + Ar	!   1.8e-31
+HO2 + NO2 + N2 => HNO2 + O2 + N2	!   1.8e-31
+HO2 + NO2 + O2 => HNO2 + O2 + O2	!   1.8e-31
+HO2 + NO2 + H2 => HNO2 + O2 + H2	!   4.0e-31
+HO2 + NO2 + H2O => HNO2 + O2 + H2O	!   1.0e-30*exp(-635/T_g)
+HO2 + NO2 + O3 => HNO2 + O2 + O3	!   4.0e-31
+HO2 + NO2 + Ar => HNO4 + Ar	 !   2.2e-31
+HO2 + NO2 + N2 => HNO4 + N2	 !   2.2e-31
+HO2 + NO2 + O2 => HNO4 + O2	 !   2.2e-31
+HO2 + NO2 + H2 => HNO4 + H2	 !   4.4e-31
+HO2 + NO2 + H2O => HNO4 + H2O	 !   1.0e-30
+HO2 + NO2 + O3 => HNO4 + O3	 !   4.4e-31
+HO2 + NO3 => HNO3 + O2		 !   2.3e-12*exp(170/T_g)
+HO2 + NO3 => OH + NO2 + O2	 !   4.0e-12
+HO2 + HO2 => H2O2 + O2		 !   2.2e-13*exp(600/T_g)
+HO2 + HO2 + Ar => H2O2 + O2 + Ar	!   1.9e-33*exp(980/T_g)
+HO2 + HO2 + O2 => H2O2 + O2 + O2	!   1.9e-33*exp(980/T_g)
+HO2 + HO2 + N2 => H2O2 + O2 + N2	!   1.9e-33*exp(980/T_g)
+HO2 + HO2 + H2 => H2O2 + O2 + H2	!   4.0e-33*exp(980/T_g)
+HO2 + HO2 + H2O => H2O2 + O2 + H2O	!   1.0e-32*exp(-980/T_g)
+HO2 + HO2 + O3 => H2O2 + O2 + O3	!   4.0e-33*exp(-980/T_g)
+HO2 + H2O => H2O2 + OH		 !   4.65e-11*exp(-16500/T_g)
+HO2 + H2O2 => OH + H2O + O2	 !   1.0e-16
+HO2 + NH => HNO + OH		 !   2.5e-14
+H2O + O => OH + OH		 !   1.67e-11*exp(-8680/T_g)
+H2O + O(1D) => H2 + O2		 !   2.2e-12
+H2O + N(2D) => OH + NH		 !   2.5e-10
+H2O + N2(A) => OH + N2 + H	 !   6.0e-14
+H2O + N2(a') => OH + N2 + H	 !   5.0e-14
+H2O + NO + NO2 => HNO2 + HNO2	 !   4.41e-40
+H2O + N2O3 => HNO2 + HNO2	 !   6.29e-11*exp(-4471/T_g)
+H2O + N2O4 => HNO3 + HNO2	 !   4.18e-10*exp(-5830/T_g)
+H2O + N2O5 => HNO3 + HNO3	 !   2.5e-22
+H2O + NH => HNO + H2		 !   3.32e-11*exp(-6974.2/T_g)
+H2O(vib) + N2 => H2O + N2	 !   1.0e-13
+H2O(vib) + N => H2O + N	 !   1.0e-13
+H2O(vib) + O2 => H2O + O2	 !   1.0e-13
+H2O(vib) + O3 => H2O + O3	 !   1.0e-13
+H2O(vib) + O => H2O + O	 !   1.0e-13
+H2O(vib) + H2O => H2O + H2O	 !   1.0e-13
+H2O(vib) + H2 => H2O + H2	 !   1.0e-13
+H2O(vib) + Ar => H2O + Ar	 !   1.0e-13
+H2O2 + O => HO2 + OH		 !   1.79e-13*exp(-1394/T_g)
+H2O2 + O => H2O + O2		 !   1.45e-15
+H2O2 + O(1D) => H2O + O2	 !   5.2e-10
+H2O2 + O2 => HO2 + HO2		 !   9.0e-11*exp(-20000/T_g)
+H2O2 + N2(A) => OH + OH + N2	 !   5.0e-14
+H2O2 + N2(a') => OH + OH + N2	 !   3.0e-10
+H2O2 + NO3 => HO2 + HNO3	 !   4.1e-16
+NH + O => H + NO		                !   1.16e-10
+NH + O => OH + N		                !   1.16e-11
+NH + O2 => OH + NO		 !   9.8e-15
+NH + O2 => HNO + O		 !   2.3e-13*exp(-0.1/T_g)
+NH + N => H + N2		 !   2.5e-11
+NH + NO => H + N2O		 !   3.12e-11
+NH + NO => OH + N2		 !   1.44e-11
+NH + NO => O + H + N2		 !   5.0e-11
+NH + NO2 => OH + N2O		 !   3.5e-13*exp(1140/T_g)
+NH + NO2 => HO2 + N2		 !   3.5e-13*exp(1140/T_g)
+NH + NO2 => HNO + NO		 !   3.5e-13*exp(1140/T_g)
+NH + N2O => HNO + N2		 !   3.32e-12*exp(-3019/T_g)
+NH + NO3 => HNO + NO2		 !   2.49e-11
+NH + NO3 => HNO3 + N		 !   1.66e-12*exp(-2516/T_g)
+NH + NH => N2 + H + H		 !   1.2e-9
+NH + NH => N2 + H2		 !   1.7e-11
+HNO + O => OH + NO		 !   6.0e-11
+HNO + O => NO2 + H		 !   8.3e-14*exp(-1006/T_g)
+HNO + O => O2 + NH		 !   2.94e-12*exp(-3500/T_g)
+HNO + O2 => HO2 + NO		 !   5.25e-12*exp(-1510/T_g)
+HNO + N => NH + NO		 !   2.94e-12*exp(-1000/T_g)
+HNO + N => H + N2O		 !   1.44e-12*exp(-1510/T_g)
+HNO + NO => OH + N2O		 !   4.9e-19
+HNO + NO2 => HNO2 + NO		 !   1.0e-12*exp(-200/T_g)
+HNO + HNO => H2O + N2O		 !   4.36e-17*exp(-599/T_g)
+HNO2 + O => OH + NO2		 !   2.0e-11*exp(-3000/T_g)
+HNO2 + NO2 => HNO3 + NO	 !   3.32e-13*exp(-16446.3/T_g)
+HNO2 + NO3 => NO2 + HNO3	 !   2.0e-15
+HNO2 + HNO2 => NO + NO2 + H2O	 !   6.02e-16*exp(-6113.2/T_g)
+HNO2 + HNO3 => NO2 + NO2 + H2O	 !   1.55e-17*exp(-3000/T_g)
+HNO3 + O => OH + NO3		 !   3.0e-17
+HNO3 + NO => NO2 + HNO2	 !   1.2e-12*exp(-5535/T_g)
+HNO4 + O => HO2 + NO3		 !   7.8e-11*exp(-3400/T_g)
+HNO4 + N2 => HO2 + NO2 + N2	 !   5.0e-6*exp(-10000/T_g)
+
+
+
+
+
+(3)CH2 + H2CO => CH3 + HCO	    !	1.00e-14
+(3)CH2 + HCO  => CH3 + CO 	    !	3.00e-11
+(3)CH2 + CH3O => CH3 + H2CO        !   3.00e-11
+(3)CH2 + CH3O2  => H2CO + CH3O	    !	3.00e-11
+CH + CO2 => HCO + CO               !   9.68e-13
+C2H6 + OH => C2H5 + H2O	    !	2.46e-13
+C2H6 + HO2  => C2H5 + H2O2	    !	6.36e-24
+C2H6 + HCO => C2H5 + H2CO          !   2.19e-26
+C2H6 + CH3O  => C2H5 + CH3OH	    !	2.72e-18
+C2H6 + CH3O2 => C2H5 + CH3OOH      !   6.36e-24
+C2H6 + C2H5O2 => C2H5 + C2H5OOH    !   8.69e-27
+C2H5 + H2O => C2H6 + OH            !   3.56e-29
+C2H5 + OH => C2H4 + H2O            !   4.00e-11
+C2H5 + HO2 => C2H6 + O2            !   5.00e-13
+C2H5 + HO2 => C2H4 + H2O2          !   5.00e-13
+C2H5 + H2CO => C2H6 + HCO          !   4.47e-18
+C2H5 + HCO => C2H6 + CO            !   2.00e-10
+C2H5 + CH3O => C2H6 + H2CO         !   4.00e-11
+C2H5 + CH3O2 => CH3O + C2H5O       !   4.00e-11
+C2H4 + OH => C2H3 + H2O            !   1.54e-16
+C2H4 + HO2 => CH3CHO + OH          !   1.62e-20
+C2H3 + H2O => C2H4 + OH            !   1.82e-25
+
+
+
+C2H3 + OH => C2H2 + H2O            !   5.00e-11
+C2H3 + H2CO => C2H4 + HCO          !   4.41e-18
+C2H3 + HCO => C2H4 + CO            !   1.50e-10
+C2H3 + CH3O => C2H4 + H2CO         !   4.00e-11
+C2H2 + OH => C2H + H2O             !   1.77e-22
+C2H2 + HO2 => CH2CO + OH           !   1.62e-20
+C2H + OH => (3)CH2 + CO            !   3.00e-11
+C2H + OH => C2H2 + O               !   3.00e-11
+C2H + HO2 => C2H2 + O2             !   3.00e-11
+C2H + HO2 => C2HO + OH             !   3.00e-11
+C2H + HCO => C2H2 + CO             !   1.00e-10
+C2H + CH3O => C2H2 + H2CO          !   4.00e-11
+C2H + CH3O2 => CH3O + C2HO         !   4.00e-11
+C3H8 + OH => C3H7 + H2O            !   3.76e-15
+C3H8 + HO2 => C3H7 + H2O2          !   1.58e-25
+C3H8 + HCO => C3H7 + H2CO          !   1.95e-26
+C3H8 + CH3O => C3H7 + CH3OH        !   1.42e-17
+C3H8 + CH3O2 => C3H7 + CH3OOH      !   7.69e-26
+C3H7 + H2CO => C3H8 + HCO          !   4.10e-18
+C3H7 + HCO => C3H8 + CO            !   1.00e-10
+C3H7 + CH3O => C3H8 + H2CO         !   4.00e-11
+C3H7 + CH3O2 => C2H5 + H2CO + CH3O !   5.99e-11
+H2 + HO2 => H + H2O2               !   5.43e-30
+H2 + HCO => H + H2CO               !   2.78e-26
+H2 + CH3O2 => H + CH3OOH           !   5.43e-30
+H + CO2 => CO + OH                 !   1.40e-29
+
+
+
+H + CH2CO => CH3 + CO              !   1.04e-13
+H + CH3O2 => OH + CH3O             !   1.60e-10
+O + H2O => OH + OH                 !   4.48e-24
+
+
+
+
+O + H2CO => OH + HCO                      !   1.73e-13
+O + HCO => CO + OH                        !   5.00e-11
+O + HCO => H + CO2                        !   5.00e-11
+O + CH3O => CH3 + O2                      !   2.20e-11
+O + CH3O => OH + H2CO                     !   3.00e-12
+O + CH3CHO => OH + CH3CO                  !   4.68e-13
+O + CH2CO => (3)CH2 + CO2                 !   2.29e-13
+O + CH2CO => H2CO + CO                    !   7.88e-14
+O + CH2CO => HCO + CO + H                 !   4.33e-14
+O + CH2CO => HCO + HCO                    !   4.33e-14
+O + C2HO => CO + CO + H                   !   1.60e-10
+O + CH3O2 => CH3O + O2                    !   5.99e-11
+O + CH3OOH => CH3O2 + OH                  !   5.63e-15
+O2 + HCO => CO + HO2                      !   5.10e-12
+O2 + CH3O => H2CO + HO2                   !   1.97e-15
+O2 + CH2CHO => H2CO + CO + OH             !   3.00e-14
+O2 + C2HO => CO + CO + OH                 !   6.46e-13
+O3 + CH3O2 => CH3O + O2 + O2              !   1.00e-17
+CO + HO2 => CO2 + OH                      !   1.49e-27
+CO + CH3O => CO2 + CH3                    !   6.56e-20
+H2O + HCO => H2CO + OH                    !   9.35e-32
+H2O + CH3O => CH3OH + OH                  !   1.67e-14
+
+
+
+
+OH + H2CO => H2O + HCO                    !   8.47e-12
+OH + HCO => CO + H2O                      !   1.70e-10
+OH + CH3O => H2CO + H2O                   !   3.00e-11
+OH + CH3CHO => CH3CO + H2O                !   1.49e-11
+OH + CH2CO => CO + CH2OH                  !   1.14e-11
+OH + CH3O2 => CH3OH + O2                  !   1.00e-10
+HO2 + H2CO => HCO + H2O2                  !   1.05e-20
+HO2 + HCO => OH + H + CO2                 !   5.00e-11
+HO2 + CH3O => H2CO + H2O2                 !   5.00e-13
+HO2 + CH3O2 => CH3OOH + O2                !   5.12e-12
+HO2 + C2H5O2 => C2H5OOH + O2              !   7.63e-12
+H2CO + CH3O => CH3OH + HCO                !   1.14e-15
+H2CO + CH3O2 => HCO + CH3OOH              !   1.05e-20
+HCO + HCO => H2CO + CO                    !   5.00e-11
+HCO + CH3O => CH3OH + CO                  !   1.50e-10
+HCO + CH3O2 => CH3O + H + CO2             !   5.00e-11
+CH3O + CH3O => H2CO + CH3OH               !   1.00e-10
+CH3O + CH3O2 => H2CO + CH3OOH             !   5.00e-13
+CH3O2 + CH3O2 => CH3OH + H2CO + O2        !   2.19e-13
+CH3O2 + CH3O2 => CH3O + CH3O + O2         !   1.29e-13
+C2H5O2 + C2H5O2 => C2H5OH + CH3CHO + O2   !   2.43e-14
+
+
+
+
+C2H5O2 + C2H5O2 => C2H5O + C2H5O + O2     !   3.97e-14
+CH4 + CH3CO => CH3CHO + CH3               !   1.14e-29
+CH4 + CH2OH => CH3OH + CH3                !   2.55e-27
+CH3 + H2O2 => CH4 + HO2                   !   5.46e-14
+CH3 + CH3OH => CH4 + CH3O                 !   1.01e-20
+CH3 + CH3OH => CH4 + CH2OH                !   2.66e-20
+CH3 + CH2OH => CH4 + H2CO                 !   4.00e-12
+CH3 + C2H5OH => CH4 + C2H5O               !   3.11e-19
+(3)CH2 + H2O2 => CH3 + HO2                !   1.00e-14
+(3)CH2 + CH3CO => CH2CO + CH3             !   3.00e-11
+(3)CH2 + CH3OH => CH3O + CH3              !   1.01e-20
+(3)CH2 + CH3OH => CH2OH + CH3             !   2.66e-20
+(3)CH2 + CH2OH => H2CO + CH3              !   2.00e-12
+(3)CH2 + CH2OH => C2H4 + OH               !   4.00e-11
+C2H6 + CH3CO => CH3CHO + C2H5             !   3.32e-26
+C2H6 + CH2OH => CH3OH + C2H5              !   5.93e-25
+C2H5 + H2O2 => C2H6 + HO2                 !   2.83e-15
+C2H5 + CH3OH => C2H6 + CH3O               !   3.50e-22
+C2H5 + CH3OH => C2H6 + CH2OH              !   9.49e-22
+C2H5 + CH2OH => C2H6 + H2CO               !   4.00e-12
+C2H5 + CH2OH => CH3OH + C2H4              !   4.00e-12
+C2H3 + H2O2 => C2H4 + HO2                 !   5.46e-14
+C2H3 + CH3OH => C2H4 + CH3O               !   1.01e-20
+C2H3 + CH3OH => C2H4 + CH2OH              !   2.66e-20
+C2H3 + CH2OH => C2H4 + H2CO               !   5.00e-11
+C2H3 + CH2OH => C3H5 + OH                 !   2.00e-11
+C2H2 + CH2OH => C2H3 + H2CO               !   3.32e-19
+
+
+
+C2H + CH3OH => C2H2 + CH2OH           !   1.00e-11
+C2H + CH2OH => C2H2 + H2CO            !   5.99e-11
+C3H8 + CH3CO => CH3CHO + C3H7         !   2.60e-26
+C3H8 + CH2OH => CH3OH + C3H7          !   4.45e-25
+C3H7 + OH => C3H6 + H2O               !   4.00e-11
+C3H7 + H2O2 => C3H8 + HO2             !   7.08e-17
+C3H7 + CH3OH => C3H8 + CH3O           !   3.51e-22
+C3H7 + CH3OH => C3H8 + CH2OH          !   8.45e-22
+C3H7 + CH2OH => C3H8 + H2CO           !   1.60e-12
+C3H7 + CH2OH => C3H6 + CH3OH          !   8.00e-13
+C3H6 + O => C3H5 + OH                 !   8.15e-16
+C3H6 + OH => C3H5 + H2O               !   7.69e-13
+C3H6 + HO2 => C3H5 + H2O2             !   3.24e-24
+C3H6 + HCO => C3H5 + H2CO             !   3.72e-25
+C3H6 + CH3O => C3H5 + CH3OH           !   5.65e-24
+C3H6 + CH3O2 => C3H5 + CH3OOH         !   1.25e-24
+C3H6 + CH3CO => C3H5 + CH3CHO         !   1.18e-24
+C3H6 + CH2OH => C3H5 + CH3OH          !   3.79e-24
+C3H5 + HO2 => C3H6 + O2               !   4.40e-12
+C3H5 + H2O2 => C3H6 + HO2             !   1.00e-23
+C3H5 + H2CO => C3H6 + HCO             !   6.06e-25
+C3H5 + HCO => C3H6 + CO               !   1.00e-10
+C3H5 + CH3O => C3H6 + H2CO            !   5.00e-11
+C3H5 + CH3OH => C3H6 + CH2OH          !   5.43e-29
+C3H5 + CH2OH => C3H6 + H2CO           !   3.00e-11
+H2 + CH3CO => CH3CHO + H              !   3.29e-26
+
+
+
+H2 + CH2OH => CH3OH + H         !   1.89e-23
+H + CH3OH => CH2OH + H2         !   1.27e-15
+H + CH2OH => H2CO + H2          !   1.00e-11
+H + CH2OH => CH3 + OH           !   1.60e-10
+H + C2H5OH => H2 + C2H5O        !   2.52e-17
+H + CH3OOH => H2O + CH3O        !   5.88e-15
+H + CH3OOH => H2 + CH3O2        !   7.11e-15
+O + CH3CO => OH + CH2CO         !   8.75e-11
+O + CH3CO => CO2 + CH3          !   2.63e-10
+O + CH3OH => OH + CH2OH         !   1.12e-14
+O + CH3OH => OH + CH3O          !   1.68e-15
+O + CH2OH => H2CO + OH          !   7.00e-11
+O + C2H5OOH => C2H5O2 + OH      !   5.19e-14
+O2 + CH2OH => H2CO + HO2        !   9.70e-12
+
+
+
+O2 + C2H5O => CH3CHO + HO2         !   8.12e-15
+OH + CH3CO => CH2CO + H2O          !   2.00e-11
+OH + CH3CO => CH3 + CO + OH        !   5.00e-11
+OH + CH3OH => H2O + CH2OH          !   7.67e-13
+OH + CH3OH => H2O + CH3O           !   1.35e-13
+OH + CH2OH => H2CO + H2O           !   4.00e-11
+OH + C2H5OH => H2O + C2H5O         !   1.60e-13
+OH + CH3OOH => H2O + CH3O2         !   3.55e-12
+OH + C2H5OOH => H2O + C2H5O2       !   2.83e-12
+HO2 + CH3CO => CH3 + CO2 + OH      !   5.00e-11
+HO2 + CH3OH => CH2OH + H2O2        !   1.10e-22
+HO2 + CH2OH => H2CO + H2O2         !   2.00e-11
+H2CO + CH3CO => CH3CHO + HCO       !   1.17e-22
+H2CO + CH2OH => CH3OH + HCO        !   4.22e-18
+HCO + H2O2 => H2CO + HO2           !   1.50e-18
+HCO + CH3CO => CH3CHO + CO         !   1.50e-11
+HCO + CH3OH => H2CO + CH2OH        !   6.85e-23
+HCO + CH2OH => H2CO + H2CO         !   3.00e-10
+HCO + CH2OH => CH3OH + CO          !   2.00e-10
+CH3O + CH3CO => CH3OH + CH2CO      !   1.00e-11
+CH3O + CH3OH => CH3OH + CH2OH      !   5.38e-16
+CH3O + CH2OH => H2CO + CH3OH       !   4.00e-11
+CH3O2 + H2O2 => CH3OOH + HO2       !   2.31e-19
+CH3O2 + CH3CO => CH3 + CO2 + CH3O  !   4.00e-11
+CH3O2 + CH3OH => CH2OH + CH3OOH    !   3.08e-22
+CH3O2 + CH2OH => CH3O + OH + H2CO  !   2.00e-11
+
+
+
+H2O2 + CH3CO => CH3CHO + HO2       !   3.05e-19
+H2O2 + CH2OH => CH3OH + HO2        !   6.56e-17
+CH3CO + CH3OH => CH3CHO + CH2OH    !   2.22e-22
+CH3OH + CH2OH => CH3OH + CH3O      !   2.12e-23
+CH2OH + CH2OH => H2CO + CH3OH      !   8.00e-12
+
+
+CO + O2 => CO2 + O		 !   1.23e-18*exp(-12800/T_g)
+CO + O3 => CO2 + O2		 !   4.0e-31
+CO + N2 => O + C + N2		 !   1.52e-10*exp(-129000/T_g)*(T_g/298)**(-3.1)
+CH3 + C2H2 => CH4 + C2H	 !   7.65e-26
+(3)CH2 + C2H => C2H2 + CH	 !   3.01e-11
+(3)CH2 + C3H8 => C3H7 + CH3	 !   1.02e-20
+(3)CH2 + C3H6 => C3H5 + CH3	 !   3.65e-17
+(3)CH2 + H => CH + H2		 !   2.01e-10
+C + H2 => CH + H		 !   1.5e-10
+C2H4 + C2H => C2H2 + C2H3	 !   1.4e-10
+C2H4 + H => C2H3 + H2		 !   4.92e-21
+C2H + C3H6 => C3H5 + C2H2	 !   5.99e-12
+C2H + H => C2 + H2		 !   1.66e-31
+O3 + O => O + O2 + O		 !   3.14e-27
+CH4 + O => CH3 + OH		 !   5.54e-18
+(3)CH2 + O2 => CO2 + H2	 !   1.42e-12
+(3)CH2 + O2 => CO + H2O 	 !   1.42e-12
+(3)CH2 + O2 => H2CO + O 	 !   5.39e-13
+CH + O => CO + H 		 !   6.6e-11
+CH + O2 => CO2 + H 		 !   1.2e-11
+CH + O2 => CO + OH 		 !   8.0e-12
+CH + O2 => HCO + O 		 !   8.0e-12
+CH + O2 => CO + H + O 		 !   1.2e-11
+C2H6 + O => C2H5 + OH		 !   5.11e-16
+C2H5 + O2 => C2H4 + HO2	 !   3.8e-15
+C2H4 + O3 => H2CO + CO2 + H2	 !   7.06e-19
+C2H4 + O3 => H2CO + CO + H2O	 !   7.06e-19
+C2H4 + O3 => C2H2O + O 	 !   2.69e-19
+C2H3 + O => HCO + (3)CH2 	 !   1.25e-11
+C2H3 + O => CH2CO + H 		 !   1.25e-11
+C2H3 + O2 => H2CO + HCO 	 !   9.00e-12
+C2H + O => CH + CO 		 !   1.70e-11
+C2H + O2 => HCO + CO 		 !   3.00e-11
+C2H + O2 => C2HO + O 		 !   1.00e-12
+C3H8 + O => C3H7 + OH 		 !   2.73e-15
+CH4 + HO2 => CH3 + H2O2 	 !   8.76e-27
+CH4 + HCO => CH3 + H2CO 	 !   6.07e-30
+CH4 + CH3O => CH3OH + CH3 	 !   9.42e-20
+CH4 + CH3O2 => CH3 + CH3OOH 	 !   1.03e-26
+CH3 + H2O => CH4 + OH 		 !   1.82e-25
+CH3 + OH => CH2OH + H 		 !   1.31e-11
+CH3 + OH => CH3O + H 		 !   1.6e-10
+CH3 + HO2 => CH3O + OH 	 !   3.0e-11
+CH3 + HO2 => CH4 + O2 		 !   5.99e-12
+CH3 + H2CO => CH4 + HCO 	 !   6.14e-18
+CH3 + CH3CHO => CH4 + CH3CO 	 !   4.95e-18
+CH3 + CH3O2 => CH3O + CH3O 	 !   4.0e-11
+(3)CH2 + CO2 => H2CO + CO 	 !   3.9e-14
+(3)CH2 + H2O => CH3 + OH 	 !   1.6e-16
+(3)CH2 + OH => H2CO + H 	 !   3.0e-11
+(3)CH2 + HO2 => H2CO + OH 	 !   3.0e-11
+
+
+NH2 + wall => NH2(S)			!   (Kc/16**(1/2))
+NH2(S) + H => NH3 + wall           !   (Kc/1**(1/2))*(n_N2/(n_N2/(3.5e-12) + 1.0/(1.0e-33 )))
+NH2(S) + H2 => NH3 + H + wall      !   (Kc/2**(1/2))*2.09e-12*exp(-4280/T_g)
+NH2(S) + H => NH + H2 + wall       !   (Kc/1**(1/2))*2.0e-11*exp(-2400/T_g)
+NH2(S) + C => HCN + H + wall       !   (Kc/12**(1/2))*3.0e-11*((T_g/300)**(-0.2))*exp(6/T_g)
+NH2(S) + C => HNC + H + wall       !   (Kc/12**(1/2))*3.0e-11*((T_g/300)**(-0.2))*exp(6/T_g)
+NH2(S) + CH3 => CH3NH2 + wall      !   (Kc/15**(1/2))*n_N2/(n_N2/(1.3e-10*(T_g/300)**0.42) + 1.0/(1.8e-27*(T_g/300)**(-3.85) ))
+NH2(S) + CH4 => NH3 + CH3 + wall   !   (Kc/16**(1/2))*3.99e-14*((T_g/300)**3.59)*exp(-4540/T_g)
+NH2(S) + C2H2 => NH3 + C2H + wall  !   (Kc/26**(1/2))*1.11e-13*exp(-1850/T_g)
+NH2(S) + C2H3 => NH3 + C2H2 + wall !   (Kc/27**(1/2))*2.0e-1
+NH2(S) + C2H3 => C2H3NH + H + wall !   (Kc/27**(1/2))*8.0e-11
+NH2(S) + C2H4 => NH3 + C2H3 + wall !   (Kc/28**(1/2))*3.42e-14*exp(-1320/T_g)
+NH2(S) + C2H5 => NH3 + C2H4 + wall !   (Kc/29**(1/2))*1.0e-11
+NH2(S) + C2H5 => CH3NH + CH3 + wall !   (Kc/29**(1/2))*6.0e-11
+NH2(S) + C2H6 => NH3 + C2H5 + wall !   (Kc/30**(1/2))*6.14e-13*exp(-3600/T_g)
+NH2(S) + NH2 => N2H4 + wall        !   (Kc/16**(1/2))*(n_N2/(n_N2/(8.0e-11) + 1.0/(5.7e-29 )))
+NH2(S) + N2H2 => NH3 + N2H + wall  !   (Kc/30**(1/2))*1.62e-15*((T_g/300)**4.05)*exp(-810/T_g)
+NH2(S) + N2H4 => N2H3 + NH3 + wall !   (Kc/32**(1/2))*2.0e-11*exp(-1100/T_g)
+NH2(S) + H2CN => HCN + NH3 + wall  !   (Kc/28**(1/2))*5.4e-11*((T_g/300)**(-1.1))*exp(-60/T_g)
+NH2(S) + H2CN => H2CNNH2 + wall    !   (Kc/28**(1/2))*n_N2/(n_N2/(1.0e-10) + 1.0/(1.0e-28*(T_g/300)**(-3.5) ))
+
+
+ENDREACTIONS
+
+
+
+
+
+
+DECLARATIONS:
+
+REAL(DP), parameter ::  f_hv = 0.0_DP
+
+ENDDECLARATIONS
+
+

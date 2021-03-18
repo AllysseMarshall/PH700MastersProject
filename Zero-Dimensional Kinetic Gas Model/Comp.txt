@@ -1,0 +1,9 @@
+make clean
+
+Clear
+
+python parsereact.py reakce_new_19.txt
+
+make
+
+./Run
